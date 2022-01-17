@@ -11,6 +11,7 @@
 body {
   background-image: url("../Images/emerald.png");
   background-color: red;
+  background-size: cover;
 }
 
 #main-title {
@@ -22,7 +23,7 @@ body {
   background-color: #FFCB05;
 }
 
-#pressstart {
+#pressstart, #inputname {
   font-family: Pokemon-text;
   color: black;
   margin-top: 400px;
@@ -44,6 +45,24 @@ body {
   to {
     transform: translateY(-15px);
   }
+}
+
+#username {
+  width: 500px;
+  font-family: Pokemon-text;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+#username::placeholder {
+  color: black;
+}
+
+#inputname {
+  font-family: Pokemon-text;
+}
+
+#mainc {
+  margin-top: 400px;
 }
 
 /*# sourceMappingURL=mysassstyles.css.map */
