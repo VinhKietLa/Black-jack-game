@@ -18,6 +18,8 @@
 //Colors 
 $pokemon-hero-color: #FFCB05;
 $pokemon-blue-color: #2A75BB;
+$pokemon-red-color: #FF0000;
+$pokemon-sky-blue: #3c5aa6;
 
 
 body {
@@ -78,4 +80,24 @@ body {
 
 #mainc{
     margin-top: 400px;
+}
+
+.buttonblock {
+    margin-top: 30px;
+}
+
+.buttonblock {
+    
+    .redyes
+    {
+        color:$pokemon-red-color;
+        font-family: Pokemon-text;
+        background-color: rgba(0,0,0,0.1);
+
+    }
+    .blueno {
+    color: $pokemon-sky-blue;
+    font-family: Pokemon-text;
+    background-color: rgba(0,0,0,0.1);
+    }
 }

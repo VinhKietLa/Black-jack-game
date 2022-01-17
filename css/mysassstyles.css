@@ -65,4 +65,19 @@ body {
   margin-top: 400px;
 }
 
+.buttonblock {
+  margin-top: 30px;
+}
+
+.buttonblock .redyes {
+  color: #FF0000;
+  font-family: Pokemon-text;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.buttonblock .blueno {
+  color: #3c5aa6;
+  font-family: Pokemon-text;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
 /*# sourceMappingURL=mysassstyles.css.map */
