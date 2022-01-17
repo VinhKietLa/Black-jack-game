@@ -1,15 +1,18 @@
-ul {
-  color: #329291;
-  list-style-type: square;
-  list-style-position: inside;
-  display: inline-block;
-}
-
 @font-face {
-  src: url("../fonts/pokemongb-raeo-webfont.woff2") format("woff2");
+  src: url("../fonts/pokemon_solid-webfont.woff2") format("woff2");
   font-family: "Pokemon-title";
   font-weight: 400;
 }
+@font-face {
+  src: url("../fonts/pokemongb-raeo-webfont.woff2") format("woff2");
+  font-family: "Pokemon-text";
+  font-weight: 400;
+}
+body {
+  background-image: url("../Images/emerald.png");
+  background-color: red;
+}
+
 #main-title {
   font-family: "Pokemon-title";
   color: #2A75BB;
@@ -17,6 +20,12 @@ ul {
 
 .pokemon-title {
   background-color: #FFCB05;
+}
+
+#pressstart {
+  margin-top: 25rem;
+  font-family: Pokemon-text;
+  color: black;
 }
 
 /*# sourceMappingURL=mysassstyles.css.map */

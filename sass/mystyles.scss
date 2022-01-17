@@ -1,23 +1,30 @@
 @charset "utf-8";
 
-//Colors 
-
-$pokemon-hero-color: #FFCB05;
-$pokemon-blue-color: #2A75BB;
-
-ul {
-    color:rgb(50, 146, 145);
-    list-style-type: square;
-    list-style-position: inside;
-    display: inline-block;
+@font-face {
+    // This is parsed as a normal function call that takes a quoted string.
+    src: url("../fonts/pokemon_solid-webfont.woff2") format("woff2");
+    font-family: "Pokemon-title";
+    font-weight: 400;
 }
 
 @font-face {
     // This is parsed as a normal function call that takes a quoted string.
     src: url("../fonts/pokemongb-raeo-webfont.woff2") format("woff2");
-    font-family: "Pokemon-title";
+    font-family: "Pokemon-text";
     font-weight: 400;
 }
+
+
+//Colors 
+$pokemon-hero-color: #FFCB05;
+$pokemon-blue-color: #2A75BB;
+
+
+body {
+    background-image: url("../Images/emerald.png") ;
+    background-color: red;
+}
+
 
 #main-title {
     font-family: "Pokemon-title";
@@ -26,4 +33,10 @@ ul {
 
 .pokemon-title {
     background-color: $pokemon-hero-color;
+}
+
+#pressstart {
+    margin-top: 25rem;
+    font-family: Pokemon-text;
+    color:black;
 }
