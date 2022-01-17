@@ -1,10 +1,29 @@
 @charset "utf-8";
 
-* {color: rgb(38, 36, 4);}
+//Colors 
+
+$pokemon-hero-color: #FFCB05;
+$pokemon-blue-color: #2A75BB;
 
 ul {
     color:rgb(50, 146, 145);
     list-style-type: square;
     list-style-position: inside;
     display: inline-block;
+}
+
+@font-face {
+    // This is parsed as a normal function call that takes a quoted string.
+    src: url("../fonts/pokemongb-raeo-webfont.woff2") format("woff2");
+    font-family: "Pokemon-title";
+    font-weight: 400;
+}
+
+#main-title {
+    font-family: "Pokemon-title";
+    color: $pokemon-blue-color;
+} 
+
+.pokemon-title {
+    background-color: $pokemon-hero-color;
 }

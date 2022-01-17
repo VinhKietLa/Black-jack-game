@@ -1,12 +1,22 @@
-* {
-  color: #262404;
-}
-
 ul {
   color: #329291;
   list-style-type: square;
   list-style-position: inside;
   display: inline-block;
+}
+
+@font-face {
+  src: url("../fonts/pokemongb-raeo-webfont.woff2") format("woff2");
+  font-family: "Pokemon-title";
+  font-weight: 400;
+}
+#main-title {
+  font-family: "Pokemon-title";
+  color: #2A75BB;
+}
+
+.pokemon-title {
+  background-color: #FFCB05;
 }
 
 /*# sourceMappingURL=mysassstyles.css.map */
