@@ -12,6 +12,28 @@ let startgame = document.getElementById('startgame');
 let gameOver = false;
 
 
+/*Name page*/
+
+let playerName = {
+    name: '',
+}
+
+let username = document.getElementById("username");
+let submitBtn = document.querySelector(".redyes");
+let cancelBtn = document.querySelector(".blueno");
+
+
+submitBtn.addEventListener('click',(event) => {
+    event.preventDefault();
+    playerName.name = username.value;
+    document.location.href = '/html/playinggame.html';
+});
+
+cancelBtn.addEventListener('click', (event) => {
+    document.location.href = '../index.html';
+});
+
+
 
 /*This function creates the random cards used for blackjack*/
 
