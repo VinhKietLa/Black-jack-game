@@ -1,16 +1,16 @@
 // Creates array to store the card card and suit numbers.
 
-var cards = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
-var suits = ["diamonds", "hearts", "spades", "clubs"];
+let cards = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+let suits = ["diamonds", "hearts", "spades", "clubs"];
 
 // This function loops through each card and suit and creates an object pair e.g [{value: 'A', Suit: 'Spades'}] and returns the pairs in the variable deck.
 
 function getDeck() {
-    var deck = new Array();
+    let deck = new Array();
 
     for (var i = 0; i < suits.length; i++) {
-        for (var x = 0; x < cards.length; x++) {
-            var card = { Value: cards[x], Suit: suits[i] };
+        for (let x = 0; x < cards.length; x++) {
+            let card = { Value: cards[x], Suit: suits[i] };
             deck.push(card);
         }
     }
@@ -22,48 +22,90 @@ function getDeck() {
 function shuffle() {
     // for 1000 turns
     // switch the values of two random cards
-    for (var i = 0; i < 1000; i++) {
-        var location1 = Math.floor((Math.random() * deck.length));
-        var location2 = Math.floor((Math.random() * deck.length));
-        var tmp = deck[location1];
+    for (let i = 0; i < 1000; i++) {
+        let location1 = Math.floor((Math.random() * deck.length));
+        let location2 = Math.floor((Math.random() * deck.length));
+        let tmp = deck[location1];
         deck[location1] = deck[location2];
         deck[location2] = tmp;
     }
-
-    renderDeck();
+    displayRandomCards()
 }
+
+function displayRandomCards() {
+    document.getElementById('deck').innerHTML = '';
+
+    let firstCard = Math.floor((Math.random() * deck.length));
+    let secondCard = Math.floor((Math.random() * deck.length));
+    let c1 = deck[firstCard];
+    let c2 = deck[secondCard];
+    let newArray = [ ];
+    console.log(deck[firstCard]);
+    console.log(deck[secondCard]);
+    newArray.push(c1)
+    newArray.push(c2)
+    console.log(c1.Suit);
+    console.log(c2.Suit);
+    console.log(newArray);
+    console.log(newArray[0].Suit);
+    console.log(newArray[1].Suit);
+
+    console.log(newArray.length);
+  
+
+    for (let i = 0; i<newArray.length; i++) {
+        var card = document.createElement("div");
+        var icon = '';
+    if (newArray[i].Suit == 'hearts')
+        icon = '&hearts;';
+    else if (newArray[i].Suit == 'spades')
+        icon = '&spades;';
+    else if (newArray[i].Suit == 'diamonds')
+        icon = '&diams;';
+    else
+        icon = '&clubs;';
+
+    card.innerHTML = newArray[i].Value + '' + icon;
+    card.classList.add('card');
+    card.classList.add('suit');
+    card.classList.add(deck[i].Suit);
+    document.getElementById("deck").appendChild(card);
+}
+}
+
 
 // This function creates the Divs and classes that will actually display the object pairs on the page. 
 
-function renderDeck() {
-    document.getElementById('deck').innerHTML = '';
+// function renderDeck() {
+//     document.getElementById('deck').innerHTML = '';
 
-    for (var i = 0; i < deck.length; i++) {
-        var card = document.createElement("div");
-        var icon = '';
-        if (deck[i].Suit == 'hearts')
-            icon = '&hearts;';
-        else if (deck[i].Suit == 'spades')
-            icon = '&spades;';
-        else if (deck[i].Suit == 'diamonds')
-            icon = '&diams;';
-        else
-            icon = '&clubs;';
+//     for (var i = 0; i < deck.length; i++) {
+//         var card = document.createElement("div");
+//         var icon = '';
+//         if (deck[i].Suit == 'hearts')
+//             icon = '&hearts;';
+//         else if (deck[i].Suit == 'spades')
+//             icon = '&spades;';
+//         else if (deck[i].Suit == 'diamonds')
+//             icon = '&diams;';
+//         else
+//             icon = '&clubs;';
 
-        card.innerHTML = deck[i].Value + '' + icon;
-        card.classList.add('card');
-        card.classList.add('suit');
-        card.classList.add(deck[i].Suit);
-        document.getElementById("deck").appendChild(card);
-    }
-}
+//         card.innerHTML = deck[i].Value + '' + icon;
+//         card.classList.add('card');
+//         card.classList.add('suit');
+//         card.classList.add(deck[i].Suit);
+//         document.getElementById("deck").appendChild(card);
+//     }
+// }
 
 // This executes the functions when the page loads
 
 function load() {
     deck = getDeck();
     shuffle();
-    renderDeck();
+    // renderDeck();
+    displayRandomCards()
 }
 
 window.addEventListener('load', load);
@@ -78,7 +120,6 @@ let cancelBtn = document.querySelector(".blueno");
 
 submitBtn.addEventListener('click', (event) => {
     event.preventDefault();
-    playerName.name = username.value;
     document.location.href = '/html/playinggame.html';
     return playerName;
 });
@@ -194,5 +235,3 @@ console.log(playerName);
 //     };
 // }
 // newcard.addEventListener('click', (newCard));
-
-
