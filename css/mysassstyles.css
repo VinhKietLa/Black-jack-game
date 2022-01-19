@@ -10,20 +10,20 @@
 }
 body {
   background-image: url("../Images/emerald.png");
-  background-color: red;
   background-size: cover;
 }
 
 #main-title {
   font-family: "Pokemon-title";
-  color: #2A75BB;
+  color: #2a75bb;
 }
 
 .pokemon-title {
-  background-color: #FFCB05;
+  background-color: #ffcb05;
 }
 
-#pressstart, #inputname {
+#pressstart,
+#inputname {
   font-family: Pokemon-text;
   color: black;
   margin-top: 400px;
@@ -70,7 +70,7 @@ body {
 }
 
 .buttonblock .redyes {
-  color: #FF0000;
+  color: #ff0000;
   font-family: Pokemon-text;
   background-color: rgba(0, 0, 0, 0.1);
 }
@@ -78,6 +78,36 @@ body {
   color: #3c5aa6;
   font-family: Pokemon-text;
   background-color: rgba(0, 0, 0, 0.1);
+}
+
+.card {
+  border: solid 1px #aaa;
+  border-radius: 9px;
+  width: 95px;
+  height: 150px;
+  float: left;
+  padding: 3px 3px 3px 3px;
+  margin: 5px;
+  background-size: 75px 75px;
+  background-repeat: no-repeat;
+  background-position-x: 11px;
+  background-position-y: 50px;
+}
+
+.hearts {
+  background-image: url("../Images/bullbasaur.png");
+}
+
+.clubs {
+  background-image: url("../Images/charmander.png");
+}
+
+.spades {
+  background-image: url("../Images/squirtle.png");
+}
+
+.diamonds {
+  background-image: url("../Images/pikachu.png");
 }
 
 /*# sourceMappingURL=mysassstyles.css.map */

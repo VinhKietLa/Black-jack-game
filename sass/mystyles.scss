@@ -14,60 +14,56 @@
     font-weight: 400;
 }
 
-
-//Colors 
-$pokemon-hero-color: #FFCB05;
-$pokemon-blue-color: #2A75BB;
-$pokemon-red-color: #FF0000;
+//Colors
+$pokemon-hero-color: #ffcb05;
+$pokemon-blue-color: #2a75bb;
+$pokemon-red-color: #ff0000;
 $pokemon-sky-blue: #3c5aa6;
 
-
 body {
-    background-image: url("../Images/emerald.png") ;
-    background-color: red;
+    background-image: url("../Images/emerald.png");
     background-size: cover;
 }
-
 
 #main-title {
     font-family: "Pokemon-title";
     color: $pokemon-blue-color;
-} 
+}
 
 .pokemon-title {
     background-color: $pokemon-hero-color;
 }
 
-#pressstart, #inputname {
+#pressstart,
+#inputname {
     font-family: Pokemon-text;
-    color:black;
+    color: black;
     margin-top: 400px;
     animation: bounce 1s infinite alternate;
     -webkit-animation: bounce 1s infinite alternate;
-  
-  @keyframes bounce {
-    from {
-      transform: translateY(0px);
-    }
-    to {
-      transform: translateY(-15px);
-    }
-  }
-  @-webkit-keyframes bounce {
-    from {
-      transform: translateY(0px);
-    }
-    to {
-      transform: translateY(-15px);
-    }
-  }
-}
 
+    @keyframes bounce {
+        from {
+            transform: translateY(0px);
+        }
+        to {
+            transform: translateY(-15px);
+        }
+    }
+    @-webkit-keyframes bounce {
+        from {
+            transform: translateY(0px);
+        }
+        to {
+            transform: translateY(-15px);
+        }
+    }
+}
 
 #username {
     width: 500px;
     font-family: Pokemon-text;
-    background-color: rgba(0,0,0,0.1);
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 #username::placeholder {
@@ -78,7 +74,7 @@ body {
     font-family: Pokemon-text;
 }
 
-#mainc{
+#mainc {
     margin-top: 400px;
 }
 
@@ -87,17 +83,41 @@ body {
 }
 
 .buttonblock {
-    
-    .redyes
-    {
-        color:$pokemon-red-color;
+    .redyes {
+        color: $pokemon-red-color;
         font-family: Pokemon-text;
-        background-color: rgba(0,0,0,0.1);
-
+        background-color: rgba(0, 0, 0, 0.1);
     }
     .blueno {
-    color: $pokemon-sky-blue;
-    font-family: Pokemon-text;
-    background-color: rgba(0,0,0,0.1);
+        color: $pokemon-sky-blue;
+        font-family: Pokemon-text;
+        background-color: rgba(0, 0, 0, 0.1);
     }
+}
+
+.card {
+    border: solid 1px #aaa;
+    border-radius: 9px;
+    width: 95px;
+    height: 150px;
+    float: left;
+    padding: 3px 3px 3px 3px;
+    margin: 5px;
+    background-size: 75px 75px;
+    background-repeat: no-repeat;
+    background-position-x: 11px;
+    background-position-y: 50px;
+}
+
+.hearts {
+    background-image: url("../Images/bullbasaur.png");
+}
+.clubs {
+    background-image: url("../Images/charmander.png");
+}
+.spades {
+    background-image: url("../Images/squirtle.png");
+}
+.diamonds {
+    background-image: url("../Images/pikachu.png");
 }
