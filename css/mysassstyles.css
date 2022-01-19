@@ -57,7 +57,7 @@ body {
   color: black;
 }
 
-#inputname {
+#inputname, #hit, #stand {
   font-family: Pokemon-text;
 }
 
@@ -92,6 +92,7 @@ body {
   background-repeat: no-repeat;
   background-position-x: 11px;
   background-position-y: 50px;
+  font-size: 25px;
 }
 
 .hearts {
@@ -108,6 +109,14 @@ body {
 
 .diamonds {
   background-image: url("../Images/pikachu.png");
+}
+
+#hit {
+  background-color: red;
+}
+
+#stand {
+  background-color: #6992F2;
 }
 
 /*# sourceMappingURL=mysassstyles.css.map */

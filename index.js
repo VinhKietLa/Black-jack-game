@@ -37,13 +37,21 @@ function displayRandomCards() {
 
     let firstCard = Math.floor((Math.random() * deck.length));
     let secondCard = Math.floor((Math.random() * deck.length));
+    let thirdCard = Math.floor((Math.random() * deck.length));
+    let fourthCard = Math.floor((Math.random() * deck.length));
     let c1 = deck[firstCard];
     let c2 = deck[secondCard];
+    let c3 = deck[thirdCard];
+    let c4 = deck[fourthCard];
+
     let newArray = [ ];
     console.log(deck[firstCard]);
     console.log(deck[secondCard]);
     newArray.push(c1)
     newArray.push(c2)
+    newArray.push(c3)
+    newArray.push(c4)
+
     console.log(c1.Suit);
     console.log(c2.Suit);
     console.log(newArray);
@@ -64,7 +72,6 @@ function displayRandomCards() {
         icon = '&diams;';
     else
         icon = '&clubs;';
-
     card.innerHTML = newArray[i].Value + '' + icon;
     card.classList.add('card');
     card.classList.add('suit');
@@ -129,6 +136,7 @@ cancelBtn.addEventListener('click', (event) => {
 });
 
 console.log(playerName);
+
 
 
 
