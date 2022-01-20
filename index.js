@@ -19,6 +19,7 @@ function getDeck() {
 
 // This function loops through 1000 times and generates a random number between 1-52 and swaps the location of two object pair and executes the function that shows the cards on the page.
 
+
 function shuffle() {
     // for 1000 turns
     // switch the values of two random cards
@@ -29,7 +30,7 @@ function shuffle() {
         deck[location1] = deck[location2];
         deck[location2] = tmp;
     }
-    displayRandomCards()
+    // displayRandomCards()
 }
 
 function displayRandomCards() {
@@ -37,30 +38,16 @@ function displayRandomCards() {
 
     let firstCard = Math.floor((Math.random() * deck.length));
     let secondCard = Math.floor((Math.random() * deck.length));
-    let thirdCard = Math.floor((Math.random() * deck.length));
-    let fourthCard = Math.floor((Math.random() * deck.length));
+
     let c1 = deck[firstCard];
     let c2 = deck[secondCard];
-    let c3 = deck[thirdCard];
-    let c4 = deck[fourthCard];
 
     let newArray = [ ];
     console.log(deck[firstCard]);
     console.log(deck[secondCard]);
     newArray.push(c1)
     newArray.push(c2)
-    newArray.push(c3)
-    newArray.push(c4)
-
-    console.log(c1.Suit);
-    console.log(c2.Suit);
-    console.log(newArray);
-    console.log(newArray[0].Suit);
-    console.log(newArray[1].Suit);
-
-    console.log(newArray.length);
   
-
     for (let i = 0; i<newArray.length; i++) {
         var card = document.createElement("div");
         var icon = '';
@@ -79,6 +66,46 @@ function displayRandomCards() {
     document.getElementById("deck").appendChild(card);
 }
 }
+
+function newcard() {
+    document.getElementById('deck2').innerHTML = '';
+
+    let firstCard = Math.floor((Math.random() * deck.length));
+
+    let c1 = deck[firstCard];
+
+    let newArray = [ ];
+    console.log(deck[firstCard]);
+    newArray.push(c1)
+  
+    for (let i = 0; i<newArray.length; i++) {
+        var card = document.createElement("div");
+        var icon = '';
+    if (newArray[i].Suit == 'hearts')
+        icon = '&hearts;';
+    else if (newArray[i].Suit == 'spades')
+        icon = '&spades;';
+    else if (newArray[i].Suit == 'diamonds')
+        icon = '&diams;';
+    else
+        icon = '&clubs;';
+    card.innerHTML = newArray[i].Value + '' + icon;
+    card.classList.add('card');
+    card.classList.add('suit');
+    card.classList.add(deck[i].Suit);
+    document.getElementById("deck2").appendChild(card);
+}
+}
+
+
+
+let dealbtn = document.getElementById('deal');
+let hitbtn = document.getElementById('hit');
+
+
+dealbtn.addEventListener('click', (displayRandomCards));
+
+hitbtn.addEventListener('click', (newcard));
 
 
 // This function creates the Divs and classes that will actually display the object pairs on the page. 
@@ -112,42 +139,10 @@ function load() {
     deck = getDeck();
     shuffle();
     // renderDeck();
-    displayRandomCards()
+    // displayRandomCards()
 }
 
 window.addEventListener('load', load);
-
-
-//Thus function works on the playername page and directs the user to proceed with playing or going back to the homepage.
-
-let username = document.getElementById("username");
-let submitBtn = document.querySelector(".redyes");
-let cancelBtn = document.querySelector(".blueno");
-
-
-submitBtn.addEventListener('click', (event) => {
-    event.preventDefault();
-    document.location.href = '/html/playinggame.html';
-    return playerName;
-});
-
-cancelBtn.addEventListener('click', (event) => {
-    document.location.href = '../index.html';
-});
-
-console.log(playerName);
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

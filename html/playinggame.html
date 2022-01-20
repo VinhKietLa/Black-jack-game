@@ -10,36 +10,37 @@
     <section class="hero pokemon-title">
         <div class="hero-body">
             <p class="title is-size-1" id="main-title">
-                <a href = "../index.html">Vinh's Blackjack Game </a>
+                <a href="../index.html">Vinh's Blackjack Game </a>
             </p>
         </div>
     </section>
 
-    <section>
-        <!-- <h1>Blackjack</h1>
+    <div class="tile is-ancestor">
+        <div class="tile">
+            <div class="tile is-parent is-vertical">
+            <div class="dealerdeck">
+                <h1 class="title">Dealers Hand</h1>
+                <a href="javascript:void(0)" class="btn" onclick="shuffle()">Deal</a>
+                <div id="dealercard1" class="columns"></div>
+                <div id="dealercard2" class="columns"></div>
+            </div>
+        </div>
+        </div>
+        <div class="tile is-parent is-vertical">
+        <div class="deck is-child">
+            <h1 class="title">Players Hand</h1>
+            <a href="javascript:void(0)" class="btn" onclick="shuffle()">Shuffle</a>
+            <div id="deck" class="columns"></div>
+            <div id="deck2" class="columns"></div>
 
-        <p id="message-el">Want to win some money £££????</p>
-
-        <p id="cards-el">Cards:</p>
-
-        <p id="sum-el">Sum:</p>
-
-        <button id="startgame">Ready</button>
-
-        <button id="newcard">New Card</button> -->
-        
-    <div class="deck">
-        <h1>A Deck of Cards</h1>
-        <a href="javascript:void(0)" class="btn" onclick="shuffle()">Shuffle</a>
-        <div id="deck" class="columns"></div>
+        </div>
+        <div class="tile is-child user buttons">
+            <input id="deal" class="button" type="submit" value="Deal">
+            <input id="hit" class="button" type="submit" value="Hit">
+            <input id="stand" class="button stand" type="submit" value="Stand">
+        </div>
     </div>
-    </section>
-
-    <section class="section is-large">
-        <input id="hit" class="button" type="submit" value="Hit">
-        <input id="stand" class="button stand" type="submit" value="Stand">
-    </section>
-   
+    </div>
     <script src="../index.js"></script>
 </body>
 

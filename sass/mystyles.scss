@@ -70,7 +70,7 @@ body {
     color: black;
 }
 
-#inputname, #hit , #stand {
+#inputname, #hit , #stand, #deal  {
     font-family: Pokemon-text;
 }
 
@@ -128,4 +128,8 @@ body {
 
 #stand {
     background-color: #6992F2;
+}
+
+#deal {
+    background-color: $pokemon-hero-color;
 }
