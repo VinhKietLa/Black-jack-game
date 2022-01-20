@@ -16,30 +16,33 @@
     </section>
 
     <div class="tile is-ancestor">
-        <div class="tile">
-            <div class="tile is-parent is-vertical">
-            <div class="dealerdeck">
-                <h1 class="title">Dealers Hand</h1>
-                <a href="javascript:void(0)" class="btn" onclick="shuffle()">Deal</a>
-                <div id="dealercard1" class="columns"></div>
-                <div id="dealercard2" class="columns"></div>
+        <div class="tile is-12 is-vertical">
+            <div class="tile is-parent is-vertical dealerdiv">
+                <div class="dealerdeck">
+                    <h1 class="title">Dealers Hand</h1>
+                    <a href="javascript:void(0)" class="btn" onclick="shuffle()">Deal</a>
+                    <div id="dealercard1"></div>
+                    <div id="dealercard2"></div>
+                </div>
+
+
             </div>
-        </div>
-        </div>
-        <div class="tile is-parent is-vertical">
-        <div class="deck is-child">
-            <h1 class="title">Players Hand</h1>
-            <a href="javascript:void(0)" class="btn" onclick="shuffle()">Shuffle</a>
-            <div id="deck" class="columns"></div>
-            <div id="deck2" class="columns"></div>
+            <div class="tile is-parent is-vertical">
+                <div class="tile deck is-child">
+                    <h1 class="title">Players Hand</h1>
+                    <a href="javascript:void(0)" class="btn" onclick="shuffle()">Shuffle</a>
+                    <div id="deck"></div>
+                    <div id="deck2"></div>
+
+                </div>
+                <div class="tile is-child user buttons">
+                    <input id="deal" class="button" type="submit" value="Deal">
+                    <input id="hit" class="button" type="submit" value="Hit">
+                    <input id="stand" class="button stand" type="submit" value="Stand">
+                </div>
+            </div>
 
         </div>
-        <div class="tile is-child user buttons">
-            <input id="deal" class="button" type="submit" value="Deal">
-            <input id="hit" class="button" type="submit" value="Hit">
-            <input id="stand" class="button stand" type="submit" value="Stand">
-        </div>
-    </div>
     </div>
     <script src="../index.js"></script>
 </body>
