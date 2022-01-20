@@ -33,8 +33,11 @@ function shuffle() {
     // displayRandomCards()
 }
 
-function displayRandomCards() {
-    document.getElementById('deck').innerHTML = '';
+function displayRandomCards(e) {
+    let test1 = e.target.parentNode;
+    console.log(e.target.parentNode);
+
+    // document.getElementById('deck').innerHTML = '';
 
     let firstCard = Math.floor((Math.random() * deck.length));
     let secondCard = Math.floor((Math.random() * deck.length));
@@ -42,29 +45,31 @@ function displayRandomCards() {
     let c1 = deck[firstCard];
     let c2 = deck[secondCard];
 
-    let newArray = [ ];
+    let newArray = [];
     console.log(deck[firstCard]);
     console.log(deck[secondCard]);
     newArray.push(c1)
     newArray.push(c2)
-  
-    for (let i = 0; i<newArray.length; i++) {
+
+    for (let i = 0; i < newArray.length; i++) {
         var card = document.createElement("div");
         var icon = '';
-    if (newArray[i].Suit == 'hearts')
-        icon = '&hearts;';
-    else if (newArray[i].Suit == 'spades')
-        icon = '&spades;';
-    else if (newArray[i].Suit == 'diamonds')
-        icon = '&diams;';
-    else
-        icon = '&clubs;';
-    card.innerHTML = newArray[i].Value + '' + icon;
-    card.classList.add('card');
-    card.classList.add('suit');
-    card.classList.add(deck[i].Suit);
-    document.getElementById("deck").appendChild(card);
-}
+        if (newArray[i].Suit == 'hearts')
+            icon = '&hearts;';
+        else if (newArray[i].Suit == 'spades')
+            icon = '&spades;';
+        else if (newArray[i].Suit == 'diamonds')
+            icon = '&diams;';
+        else
+            icon = '&clubs;';
+        card.innerHTML = newArray[i].Value + '' + icon;
+        card.classList.add('card');
+        card.classList.add('suit');
+        card.classList.add(deck[i].Suit);
+        test1.appendChild(card);
+        // document.getElementById("deck").appendChild(card);
+        console.log(card.parentNode);
+    }
 }
 
 function newcard() {
@@ -74,27 +79,27 @@ function newcard() {
 
     let c1 = deck[firstCard];
 
-    let newArray = [ ];
+    let newArray = [];
     console.log(deck[firstCard]);
     newArray.push(c1)
-  
-    for (let i = 0; i<newArray.length; i++) {
+
+    for (let i = 0; i < newArray.length; i++) {
         var card = document.createElement("div");
         var icon = '';
-    if (newArray[i].Suit == 'hearts')
-        icon = '&hearts;';
-    else if (newArray[i].Suit == 'spades')
-        icon = '&spades;';
-    else if (newArray[i].Suit == 'diamonds')
-        icon = '&diams;';
-    else
-        icon = '&clubs;';
-    card.innerHTML = newArray[i].Value + '' + icon;
-    card.classList.add('card');
-    card.classList.add('suit');
-    card.classList.add(deck[i].Suit);
-    document.getElementById("deck2").appendChild(card);
-}
+        if (newArray[i].Suit == 'hearts')
+            icon = '&hearts;';
+        else if (newArray[i].Suit == 'spades')
+            icon = '&spades;';
+        else if (newArray[i].Suit == 'diamonds')
+            icon = '&diams;';
+        else
+            icon = '&clubs;';
+        card.innerHTML = newArray[i].Value + '' + icon;
+        card.classList.add('card');
+        card.classList.add('suit');
+        card.classList.add(deck[i].Suit);
+        document.getElementById("deck2").appendChild(card);
+    }
 }
 
 
@@ -104,8 +109,8 @@ let hitbtn = document.getElementById('hit');
 
 
 dealbtn.addEventListener('click', (displayRandomCards));
-
 hitbtn.addEventListener('click', (newcard));
+
 
 
 // This function creates the Divs and classes that will actually display the object pairs on the page. 
