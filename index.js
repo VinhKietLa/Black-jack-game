@@ -3,8 +3,8 @@
 let cards = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 let suits = ["diamonds", "hearts", "spades", "clubs"];
 let numbervalue = [1, 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10, 10, 10, 10]
-
-// This function loops through each card and suit and creates an object pair e.g [{value: 'A', Suit: 'Spades'}] and returns the pairs in the variable deck.
+let cardz = [ ];
+// This function loops through each card and suit and creates an object e.g [{value: 'A', Suit: 'Spades', NumberV: integer}] and returns the 3 values in the variable deck.
 
 function getDeck() {
     let deck = new Array();
@@ -15,12 +15,10 @@ function getDeck() {
             deck.push(card);
         }
     }
-    console.log(deck);
     return deck;
 }
 
 // This function loops through 1000 times and generates a random number between 1-52 and swaps the location of two object pair and executes the function that shows the cards on the page.
-
 
 // function shuffle() {
 //     // for 1000 turns
@@ -40,20 +38,17 @@ function getDeck() {
 let isAlive = false;
 let gameOver = false;
 let sum = 0;
+let cardSum = document.querySelector('#cardSum');
 
-function displayRandomCards(e) {
-    let test1 = e.target.parentNode;
+function displayRandomCards(event) {
+    let test1 = event.target.parentNode;
 
     let firstCard = Math.floor((Math.random() * deck.length));
-    // let secondCard = Math.floor((Math.random() * deck.length));
 
     let c1 = deck[firstCard];
-    // let c2 = deck[secondCard];
 
     let newArray = [];
     newArray.push(c1)
-    // newArray.push(c2)
-
     for (let i = 0; i < newArray.length; i++) {
         var card = document.createElement("div");
         var icon = '';
@@ -70,82 +65,64 @@ function displayRandomCards(e) {
         card.classList.add('suit');
         card.classList.add(deck[i].Suit);
         test1.appendChild(card);
-        console.log(c1);
+        console.log(c1.NumberV);
+        sum +=  c1.NumberV;
+        console.log(sum);
+        cardSum.innerHTML = sum
+    }
+
+}
+
+
+function dealHands() {
+    if (gameOver === false) {
+    isAlive = true;
+    let firstCard = displayRandomCards(event);
+    let secondCard = displayRandomCards(event);
+    
+    // renderGame();
     }
 }
 
-function getRandomCard() {
-    console.log(deck);
-    let firstCard = Math.floor((Math.random() * deck.length));
-    let c1 = deck[firstCard];
-    console.log(c1);
-    console.log(c1.Value[0]);
-    let secondCard = Math.floor((Math.random() * deck.length));
-    let c2 = deck[secondCard];
-    console.log(c2);
-    let sum = firstCard + secondCard;
-    console.log(sum);
-    return firstCard;
+function newCard() {
+    if (isAlive === true){
+    console.log('Drawing a new card from the deck');
+    let newdraw = displayRandomCards(event);    
+    };
 }
 
-let cardz = [];
+//This function creates a new card when the user clicks the 'Hit' button.
 
-// function getRandomCard() {
-//     // if 1     -> return 11
-//     // if 11-13 -> return 10
-//     let randomNumer = Math.floor(Math.random() * 13) + 1
-//     if (randomNumer > 10) {
-//         return 10
-//     } else if (randomNumer === 1) {
-//         return 11
-//     } else {
-//         return randomNumer
+// function newcard() {
+//     document.getElementById('deck2').innerHTML = '';
+
+//     let firstCard = Math.floor((Math.random() * deck.length));
+
+//     let c1 = deck[firstCard];
+
+//     let newArray = [];
+//     console.log(deck[firstCard]);
+
+//     for (let i = 0; i < newArray.length; i++) {
+//         var card = document.createElement("div");
+//         var icon = '';
+//         if (newArray[i].Suit == 'hearts')
+//             icon = '&hearts;';
+//         else if (newArray[i].Suit == 'spades')
+//             icon = '&spades;';
+//         else if (newArray[i].Suit == 'diamonds')
+//             icon = '&diams;';
+//         else
+//             icon = '&clubs;';
+//         card.innerHTML = newArray[i].Value + '' + icon;
+//         console.log(card);
+//         card.classList.add('card');
+//         card.classList.add('suit');
+//         card.classList.add(deck[i].Suit);
+//         document.getElementById("deck2").appendChild(card);
+//         console.log(card);
 //     }
 // }
-
-// function dealHands() {
-//     if (gameOver === false) {
-//     isAlive = true;
-//     let firstCard = newcard();
-//     let secondCard = newcard();
-//     cards.push(firstCard);
-//     cards.push(secondCard);
-//     sum = firstCard + secondCard;
-//     renderGame();
-//     }
-// }
-
-function newcard() {
-    document.getElementById('deck2').innerHTML = '';
-
-    let firstCard = Math.floor((Math.random() * deck.length));
-
-    let c1 = deck[firstCard];
-
-    let newArray = [];
-    console.log(deck[firstCard]);
-    newArray.push(c1)
-
-    for (let i = 0; i < newArray.length; i++) {
-        var card = document.createElement("div");
-        var icon = '';
-        if (newArray[i].Suit == 'hearts')
-            icon = '&hearts;';
-        else if (newArray[i].Suit == 'spades')
-            icon = '&spades;';
-        else if (newArray[i].Suit == 'diamonds')
-            icon = '&diams;';
-        else
-            icon = '&clubs;';
-        card.innerHTML = newArray[i].Value + '' + icon;
-        console.log(card);
-        card.classList.add('card');
-        card.classList.add('suit');
-        card.classList.add(deck[i].Suit);
-        document.getElementById("deck2").appendChild(card);
-        console.log(card);
-    }
-}
 
 
 
@@ -154,8 +131,8 @@ let dealbtn = document.getElementById('deal');
 let hitbtn = document.getElementById('hit');
 
 
-dealbtn.addEventListener('click', (displayRandomCards));
-hitbtn.addEventListener('click', (newcard));
+dealbtn.addEventListener('click', (dealHands));
+hitbtn.addEventListener('click', (newCard));
 
 
 
@@ -189,18 +166,13 @@ hitbtn.addEventListener('click', (newcard));
 function load() {
     deck = getDeck();
     // shuffle();
-    getRandomCard();
+    // getRandomCard();
 
     // renderDeck();
     // displayRandomCards()
 }
 
 window.addEventListener('load', load);
-
-
-
-
-
 
 
 // let sum = 0;
