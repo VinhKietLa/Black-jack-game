@@ -1,7 +1,8 @@
-// Creates array to store the card card and suit numbers.
+// Creates array to store the card icons, suits and integers for each card.
 
 let cards = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 let suits = ["diamonds", "hearts", "spades", "clubs"];
+let numbervalue = [1, 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10, 10, 10, 10]
 
 // This function loops through each card and suit and creates an object pair e.g [{value: 'A', Suit: 'Spades'}] and returns the pairs in the variable deck.
 
@@ -10,46 +11,48 @@ function getDeck() {
 
     for (var i = 0; i < suits.length; i++) {
         for (let x = 0; x < cards.length; x++) {
-            let card = { Value: cards[x], Suit: suits[i] };
+            let card = { Value: cards[x], Suit: suits[i] , NumberV: numbervalue[x]};
             deck.push(card);
         }
     }
+    console.log(deck);
     return deck;
 }
 
 // This function loops through 1000 times and generates a random number between 1-52 and swaps the location of two object pair and executes the function that shows the cards on the page.
 
 
-function shuffle() {
-    // for 1000 turns
-    // switch the values of two random cards
-    for (let i = 0; i < 1000; i++) {
-        let location1 = Math.floor((Math.random() * deck.length));
-        let location2 = Math.floor((Math.random() * deck.length));
-        let tmp = deck[location1];
-        deck[location1] = deck[location2];
-        deck[location2] = tmp;
-    }
-    // displayRandomCards()
-}
+// function shuffle() {
+//     // for 1000 turns
+//     // switch the values of two random cards
+//     for (let i = 0; i < 1000; i++) {
+//         let location1 = Math.floor((Math.random() * deck.length));
+//         let location2 = Math.floor((Math.random() * deck.length));
+//         let tmp = deck[location1];
+//         deck[location1] = deck[location2];
+//         deck[location2] = tmp;
+//     }
+//     // displayRandomCards()
+// }
+
+//This functions creates two cards for the player hand
+
+let isAlive = false;
+let gameOver = false;
+let sum = 0;
 
 function displayRandomCards(e) {
     let test1 = e.target.parentNode;
-    console.log(e.target.parentNode);
-
-    // document.getElementById('deck').innerHTML = '';
 
     let firstCard = Math.floor((Math.random() * deck.length));
-    let secondCard = Math.floor((Math.random() * deck.length));
+    // let secondCard = Math.floor((Math.random() * deck.length));
 
     let c1 = deck[firstCard];
-    let c2 = deck[secondCard];
+    // let c2 = deck[secondCard];
 
     let newArray = [];
-    console.log(deck[firstCard]);
-    console.log(deck[secondCard]);
     newArray.push(c1)
-    newArray.push(c2)
+    // newArray.push(c2)
 
     for (let i = 0; i < newArray.length; i++) {
         var card = document.createElement("div");
@@ -67,10 +70,50 @@ function displayRandomCards(e) {
         card.classList.add('suit');
         card.classList.add(deck[i].Suit);
         test1.appendChild(card);
-        // document.getElementById("deck").appendChild(card);
-        console.log(card.parentNode);
+        console.log(c1);
     }
 }
+
+function getRandomCard() {
+    console.log(deck);
+    let firstCard = Math.floor((Math.random() * deck.length));
+    let c1 = deck[firstCard];
+    console.log(c1);
+    console.log(c1.Value[0]);
+    let secondCard = Math.floor((Math.random() * deck.length));
+    let c2 = deck[secondCard];
+    console.log(c2);
+    let sum = firstCard + secondCard;
+    console.log(sum);
+    return firstCard;
+}
+
+let cardz = [];
+
+// function getRandomCard() {
+//     // if 1     -> return 11
+//     // if 11-13 -> return 10
+//     let randomNumer = Math.floor(Math.random() * 13) + 1
+//     if (randomNumer > 10) {
+//         return 10
+//     } else if (randomNumer === 1) {
+//         return 11
+//     } else {
+//         return randomNumer
+//     }
+// }
+
+// function dealHands() {
+//     if (gameOver === false) {
+//     isAlive = true;
+//     let firstCard = newcard();
+//     let secondCard = newcard();
+//     cards.push(firstCard);
+//     cards.push(secondCard);
+//     sum = firstCard + secondCard;
+//     renderGame();
+//     }
+// }
 
 function newcard() {
     document.getElementById('deck2').innerHTML = '';
@@ -95,12 +138,15 @@ function newcard() {
         else
             icon = '&clubs;';
         card.innerHTML = newArray[i].Value + '' + icon;
+        console.log(card);
         card.classList.add('card');
         card.classList.add('suit');
         card.classList.add(deck[i].Suit);
         document.getElementById("deck2").appendChild(card);
+        console.log(card);
     }
 }
+
 
 
 
@@ -142,7 +188,9 @@ hitbtn.addEventListener('click', (newcard));
 
 function load() {
     deck = getDeck();
-    shuffle();
+    // shuffle();
+    getRandomCard();
+
     // renderDeck();
     // displayRandomCards()
 }
