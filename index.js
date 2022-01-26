@@ -2,8 +2,8 @@
 
 let cards = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 let suits = ["diamonds", "hearts", "spades", "clubs"];
-let numbervalue = [1, 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10, 10, 10, 10]
-let cardz = [ ];
+let numbervalue = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+let cardz = [];
 // This function loops through each card and suit and creates an object e.g [{value: 'A', Suit: 'Spades', NumberV: integer}] and returns the 3 values in the variable deck.
 
 function getDeck() {
@@ -11,7 +11,7 @@ function getDeck() {
 
     for (var i = 0; i < suits.length; i++) {
         for (let x = 0; x < cards.length; x++) {
-            let card = { Value: cards[x], Suit: suits[i] , NumberV: numbervalue[x]};
+            let card = { Value: cards[x], Suit: suits[i], NumberV: numbervalue[x] };
             deck.push(card);
         }
     }
@@ -20,28 +20,35 @@ function getDeck() {
 
 // This function loops through 1000 times and generates a random number between 1-52 and swaps the location of two object pair and executes the function that shows the cards on the page.
 
-// function shuffle() {
-//     // for 1000 turns
-//     // switch the values of two random cards
-//     for (let i = 0; i < 1000; i++) {
-//         let location1 = Math.floor((Math.random() * deck.length));
-//         let location2 = Math.floor((Math.random() * deck.length));
-//         let tmp = deck[location1];
-//         deck[location1] = deck[location2];
-//         deck[location2] = tmp;
-//     }
-//     // displayRandomCards()
-// }
+function shuffle() {
+    // for 1000 turns
+    // switch the values of two random cards
+    for (let i = 0; i < 2000; i++) {
+        let location1 = Math.floor((Math.random() * deck.length));
+        let location2 = Math.floor((Math.random() * deck.length));
+        let tmp = deck[location1];
+        deck[location1] = deck[location2];
+        deck[location2] = tmp;
+    }
+    // displayRandomCards()
+}
 
-//This functions creates two cards for the player hand
+//This functions creates two cards for the player hand.
 
-let isAlive = false;
+let isAlive = true;
 let gameOver = false;
-let sum = 0;
+let playerSum = 0;
+let dealerSum = 0;
 let cardSum = document.querySelector('#cardSum');
+let cardSum2 = document.querySelector('#cardSum2');
+let messageEl = document.getElementById('messageSum');
+let smokey = document.getElementById('dealercard1');
+
+console.log(dealerSum);
 
 function displayRandomCards(event) {
     let test1 = event.target.parentNode;
+    let smokey = document.getElementById('dealercard1');
 
     let firstCard = Math.floor((Math.random() * deck.length));
 
@@ -64,108 +71,93 @@ function displayRandomCards(event) {
         card.classList.add('card');
         card.classList.add('suit');
         card.classList.add(deck[i].Suit);
-        test1.appendChild(card);
-        console.log(c1.NumberV);
-        sum +=  c1.NumberV;
-        console.log(sum);
-        cardSum.innerHTML = sum
-    }
 
+        if (event.target.className === 'button') {
+            test1.appendChild(card);
+            playerSum += c1.NumberV;
+            cardSum.innerHTML = playerSum
+            return playerSum;
+        }
+        else {
+            smokey.appendChild(card);
+            dealerSum += c1.NumberV;
+            cardSum2.innerHTML = dealerSum;
+            return dealerSum;
+        }
+    }
 }
 
-
+// When called this function will generate and display two cards for the player.
 function dealHands() {
     if (gameOver === false) {
-    isAlive = true;
-    let firstCard = displayRandomCards(event);
-    let secondCard = displayRandomCards(event);
-    
-    // renderGame();
+        shuffle();
+        isAlive = true;
+        let firstCard = displayRandomCards(event);
+        let secondCard = displayRandomCards(event);
+        stillAlive();
     }
 }
 
+// When called this function will provide the player with 1 additional card.
+
 function newCard() {
-    if (isAlive === true){
-    console.log('Drawing a new card from the deck');
-    let newdraw = displayRandomCards(event);    
+    if (isAlive === true) {
+        console.log('Drawing a new card from the deck');
+        let newdraw = displayRandomCards(event);
+        shuffle();
+        stillAlive();
     };
 }
 
-//This function creates a new card when the user clicks the 'Hit' button.
+// When called this function will provide the dealer with 2 cards.
 
-// function newcard() {
-//     document.getElementById('deck2').innerHTML = '';
-
-//     let firstCard = Math.floor((Math.random() * deck.length));
-
-//     let c1 = deck[firstCard];
-
-//     let newArray = [];
-//     console.log(deck[firstCard]);
-
-//     for (let i = 0; i < newArray.length; i++) {
-//         var card = document.createElement("div");
-//         var icon = '';
-//         if (newArray[i].Suit == 'hearts')
-//             icon = '&hearts;';
-//         else if (newArray[i].Suit == 'spades')
-//             icon = '&spades;';
-//         else if (newArray[i].Suit == 'diamonds')
-//             icon = '&diams;';
-//         else
-//             icon = '&clubs;';
-//         card.innerHTML = newArray[i].Value + '' + icon;
-//         console.log(card);
-//         card.classList.add('card');
-//         card.classList.add('suit');
-//         card.classList.add(deck[i].Suit);
-//         document.getElementById("deck2").appendChild(card);
-//         console.log(card);
-//     }
-// }
+function dealersTurn() {
+    displayRandomCards(event);
+    displayRandomCards(event);
+    let dealerArray = [];
+    dealerArray.push(dealerSum);
+    console.log(dealerSum);
+    console.log(dealerArray);
+    for (var i = 0; i < dealerArray.length; i++) {
+        if (dealerSum < 16) {
+            displayRandomCards(event);
+            console.log('hehe');
+        }
+    }
+}
 
 
-
+function stillAlive() {
+    if (playerSum <= 20) {
+        message = "Do you want to draw a new card? 🙂"
+        gameOver = false;
+    } else if (playerSum === 21) {
+        message = "Wohoo! You've got Blackjack! 🥳"
+        hasBlackJack = true;
+        gameOver = true;
+    } else {
+        message = "You're out off the game! 😭"
+        isAlive = false;
+        gameOver = true;
+    }
+    messageEl.textContent = message;
+}
 
 let dealbtn = document.getElementById('deal');
 let hitbtn = document.getElementById('hit');
+let standbtn = document.getElementById('stand');
 
 
 dealbtn.addEventListener('click', (dealHands));
 hitbtn.addEventListener('click', (newCard));
+standbtn.addEventListener('click', (dealersTurn));
 
-
-
-// This function creates the Divs and classes that will actually display the object pairs on the page. 
-
-// function renderDeck() {
-//     document.getElementById('deck').innerHTML = '';
-
-//     for (var i = 0; i < deck.length; i++) {
-//         var card = document.createElement("div");
-//         var icon = '';
-//         if (deck[i].Suit == 'hearts')
-//             icon = '&hearts;';
-//         else if (deck[i].Suit == 'spades')
-//             icon = '&spades;';
-//         else if (deck[i].Suit == 'diamonds')
-//             icon = '&diams;';
-//         else
-//             icon = '&clubs;';
-
-//         card.innerHTML = deck[i].Value + '' + icon;
-//         card.classList.add('card');
-//         card.classList.add('suit');
-//         card.classList.add(deck[i].Suit);
-//         document.getElementById("deck").appendChild(card);
-//     }
-// }
 
 // This executes the functions when the page loads
 
 function load() {
     deck = getDeck();
-    // shuffle();
+    shuffle();
     // getRandomCard();
 
     // renderDeck();
