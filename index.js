@@ -42,6 +42,7 @@ let dealerSum = 0;
 let cardSum = document.querySelector('#cardSum');
 let cardSum2 = document.querySelector('#cardSum2');
 let messageEl = document.getElementById('messageSum');
+let messageEl2 = document.getElementById('messageSum2');
 let smokey = document.getElementById('dealercard1');
 
 console.log(dealerSum);
@@ -114,18 +115,41 @@ function newCard() {
 function dealersTurn() {
     displayRandomCards(event);
     displayRandomCards(event);
-    let dealerArray = [];
-    dealerArray.push(dealerSum);
-    console.log(dealerSum);
-    console.log(dealerArray);
-    for (var i = 0; i < dealerArray.length; i++) {
-        if (dealerSum < 16) {
+    for (var i = 0; i < 20; i++) {
+        if (dealerSum <= 15) {
             displayRandomCards(event);
-            console.log('hehe');
         }
-    }
+        dealerAlive();
+    } dealerPlayer();
 }
 
+function dealerPlayer() {
+    if (dealerSum === playerSum) {
+        alert('Tie breaker');
+        message = 'Player Lost!';
+    } else if (dealerSum > playerSum) {
+        hasBlackJack = true;
+        gameOver = true;
+        message = 'Player Lost!';
+    } else if (dealerSum < playerSum){
+        isAlive = false;
+        gameOver = true;
+        message = 'Player Wins!';
+    }
+    messageEl2.textContent = message;
+}
+
+function dealerAlive() {
+    if (dealerSum <= 20) {
+        gameOver = false;
+    } else if (dealerSum === 21) {
+        hasBlackJack = true;
+        gameOver = true;
+    } else {
+        isAlive = false;
+        gameOver = true;
+    }
+}
 
 function stillAlive() {
     if (playerSum <= 20) {
