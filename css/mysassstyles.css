@@ -57,7 +57,10 @@ body {
   color: black;
 }
 
-#inputname, #hit, #stand, #deal {
+#inputname,
+#hit,
+#stand,
+#deal {
   font-family: Pokemon-text;
 }
 
@@ -116,7 +119,7 @@ body {
 }
 
 #stand {
-  background-color: #6992F2;
+  background-color: #6992f2;
 }
 
 #deal {
@@ -124,7 +127,17 @@ body {
 }
 
 .dealerdiv {
-  margin-bottom: 350px;
+  padding-bottom: 470px !important;
+  height: 500px;
+}
+
+.dealerdiv2 {
+  padding-bottom: 310px !important;
+  height: 500px;
+}
+
+.user {
+  padding-top: 50px;
 }
 
 /*# sourceMappingURL=mysassstyles.css.map */

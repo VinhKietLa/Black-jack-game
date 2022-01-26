@@ -48,9 +48,8 @@ let smokey = document.getElementById('dealercard1');
 console.log(dealerSum);
 
 function displayRandomCards(event) {
-    let test1 = event.target.parentNode;
     let smokey = document.getElementById('dealercard1');
-
+    let test2 = document.querySelector('.test2');    
     let firstCard = Math.floor((Math.random() * deck.length));
 
     let c1 = deck[firstCard];
@@ -74,7 +73,7 @@ function displayRandomCards(event) {
         card.classList.add(deck[i].Suit);
 
         if (event.target.className === 'button') {
-            test1.appendChild(card);
+            test2.appendChild(card);
             playerSum += c1.NumberV;
             cardSum.innerHTML = playerSum
             return playerSum;
@@ -137,7 +136,6 @@ function dealerPlayer() {
     } else if(dealerSum < 21 && playerSum > 21) {
         message1 = 'You guys both lost!';
     }
-
     messageEl2.textContent = message1;
 }
 
