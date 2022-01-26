@@ -119,36 +119,26 @@ function dealersTurn() {
         if (dealerSum <= 15) {
             displayRandomCards(event);
         }
-        dealerAlive();
-    } dealerPlayer();
+    } 
+    dealerPlayer();
 }
 
 function dealerPlayer() {
-    if (dealerSum === playerSum) {
+    if (dealerSum > playerSum && dealerSum < 21) {
         alert('Tie breaker');
-        message = 'Player Lost!';
-    } else if (dealerSum > playerSum) {
-        hasBlackJack = true;
-        gameOver = true;
-        message = 'Player Lost!';
-    } else if (dealerSum < playerSum){
-        isAlive = false;
-        gameOver = true;
-        message = 'Player Wins!';
+        console.log('1');
+        message1 = 'Player Lost!';
+    } else if (dealerSum > playerSum && dealerSum > 21) {
+        message1 = 'Dealer bust';
+    } else if (dealerSum < playerSum && playerSum < 21) {
+        message1 = 'Player Wins';
+    } else if (dealerSum >= playerSum) {
+        message1 = 'Tie Breaker';
+    } else if(dealerSum < 21 && playerSum > 21) {
+        message1 = 'You guys both lost!';
     }
-    messageEl2.textContent = message;
-}
 
-function dealerAlive() {
-    if (dealerSum <= 20) {
-        gameOver = false;
-    } else if (dealerSum === 21) {
-        hasBlackJack = true;
-        gameOver = true;
-    } else {
-        isAlive = false;
-        gameOver = true;
-    }
+    messageEl2.textContent = message1;
 }
 
 function stillAlive() {
