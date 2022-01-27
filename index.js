@@ -49,7 +49,7 @@ console.log(dealerSum);
 
 function displayRandomCards(event) {
     let smokey = document.getElementById('dealercard1');
-    let test2 = document.querySelector('.test2');    
+    let test2 = document.querySelector('.test2');
     let firstCard = Math.floor((Math.random() * deck.length));
 
     let c1 = deck[firstCard];
@@ -71,14 +71,20 @@ function displayRandomCards(event) {
         card.classList.add('card');
         card.classList.add('suit');
         card.classList.add(deck[i].Suit);
+        console.log(event.target.value);
 
-        if (event.target.className === 'button') {
+        if (gameOver === false && event.target.value === 'Deal') {
+            test2.appendChild(card);
+            playerSum += c1.NumberV;
+            cardSum.innerHTML = playerSum
+            return playerSum;
+        } else if (gameOver === false && event.target.value === 'Hit') {
             test2.appendChild(card);
             playerSum += c1.NumberV;
             cardSum.innerHTML = playerSum
             return playerSum;
         }
-        else {
+        else if (dealerSum <= 16) {
             smokey.appendChild(card);
             dealerSum += c1.NumberV;
             cardSum2.innerHTML = dealerSum;
@@ -118,23 +124,25 @@ function dealersTurn() {
         if (dealerSum <= 15) {
             displayRandomCards(event);
         }
-    } 
+    }
     dealerPlayer();
 }
 
 function dealerPlayer() {
     if (dealerSum > playerSum && dealerSum < 21) {
-        alert('Tie breaker');
-        console.log('1');
-        message1 = 'Player Lost!';
-    } else if (dealerSum > playerSum && dealerSum > 21) {
-        message1 = 'Dealer bust';
-    } else if (dealerSum < playerSum && playerSum < 21) {
-        message1 = 'Player Wins';
-    } else if (dealerSum >= playerSum) {
-        message1 = 'Tie Breaker';
-    } else if(dealerSum < 21 && playerSum > 21) {
-        message1 = 'You guys both lost!';
+        message1 = 'PLAYER LOST';
+    } else if (dealerSum > 21 && playerSum > 21) {
+        message1 = 'BOTH PLAYERS LOST';
+    } else if (dealerSum < playerSum && playerSum <= 21) {
+        message1 = 'PLAYER WINS';
+    } else if (dealerSum === playerSum) {
+        message1 = 'TIE BREAKER';
+    } else if (dealerSum > 21 && playerSum < 21) {
+        message1 = 'PLAYER WINS';
+    } else if (dealerSum < playerSum && playerSum > 21) {
+        message1 = 'PLAYER LOST';
+    } else if (dealerSum === 21 && playerSum < 21) {
+        message1 = 'PLAYER LOST';
     }
     messageEl2.textContent = message1;
 }
@@ -147,10 +155,12 @@ function stillAlive() {
         message = "Wohoo! You've got Blackjack! 🥳"
         hasBlackJack = true;
         gameOver = true;
-    } else {
+    } else if (playerSum > 21) {
+        console.log('executed')
         message = "You're out off the game! 😭"
         isAlive = false;
         gameOver = true;
+        dealersTurn();
     }
     messageEl.textContent = message;
 }
