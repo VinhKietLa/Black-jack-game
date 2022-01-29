@@ -45,8 +45,6 @@ let messageEl = document.getElementById('messageSum');
 let messageEl2 = document.getElementById('messageSum2');
 let smokey = document.getElementById('dealercard1');
 
-console.log(dealerSum);
-
 function displayRandomCards(event) {
     let smokey = document.getElementById('dealercard1');
     let test2 = document.querySelector('.test2');
@@ -115,7 +113,7 @@ function newCard() {
     };
 }
 
-// When called this function will provide the dealer with 2 cards.
+// When called this function will provide the dealer with 2 cards, this executes after the player presses the stand button.
 
 function dealersTurn() {
     displayRandomCards(event);
@@ -127,6 +125,9 @@ function dealersTurn() {
     }
     dealerPlayer();
 }
+
+
+// This function prints out the winner between dealer and player
 
 function dealerPlayer() {
     if (dealerSum > playerSum && dealerSum < 21) {
@@ -147,6 +148,9 @@ function dealerPlayer() {
     messageEl2.textContent = message1;
 }
 
+// This function prints out a message for the player
+
+
 function stillAlive() {
     if (playerSum <= 20) {
         message = "Do you want to draw a new card? 🙂"
@@ -165,14 +169,22 @@ function stillAlive() {
     messageEl.textContent = message;
 }
 
+//Event listener for UI buttons
+
 let dealbtn = document.getElementById('deal');
 let hitbtn = document.getElementById('hit');
 let standbtn = document.getElementById('stand');
+let refreshbtn = document.getElementById('refresh');
 
 
 dealbtn.addEventListener('click', (dealHands));
 hitbtn.addEventListener('click', (newCard));
 standbtn.addEventListener('click', (dealersTurn));
+refreshbtn.addEventListener('click', (refresh));
+
+function refresh() {
+    location.reload();
+}
 
 
 // This executes the functions when the page loads
@@ -187,6 +199,7 @@ function load() {
 }
 
 window.addEventListener('load', load);
+
 
 
 // let sum = 0;
