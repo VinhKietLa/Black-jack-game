@@ -30,7 +30,6 @@ function shuffle() {
         deck[location1] = deck[location2];
         deck[location2] = tmp;
     }
-    // displayRandomCards()
 }
 
 //This functions creates two cards for the player hand.
@@ -97,7 +96,9 @@ function dealHands() {
         let firstCard = displayRandomCards(event);
         let secondCard = displayRandomCards(event);
         stillAlive();
-        console.log(gameOver);
+        dealbtn.style.display ='none';
+        hitbtn.style.display ='inline';
+        standbtn.style.display ='inline';
     }
 }
 
@@ -184,13 +185,11 @@ let refreshbtn = document.getElementById('refresh');
 
 dealbtn.addEventListener('click', (dealHands));
 hitbtn.addEventListener('click', (newCard));
+hitbtn.style.display = 'none';
 standbtn.addEventListener('click', (dealersTurn));
+standbtn.style.display = 'none';
+
 refreshbtn.addEventListener('click', (refresh));
-
-function refresh() {
-    location.reload();
-}
-
 
 // This executes the functions when the page loads
 
@@ -200,6 +199,10 @@ function load() {
 }
 
 window.addEventListener('load', load);
+
+function refresh() {
+    location.reload();
+}
 
 
 
