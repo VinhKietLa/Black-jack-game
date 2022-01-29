@@ -35,7 +35,7 @@ function shuffle() {
 
 //This functions creates two cards for the player hand.
 
-let isAlive = true;
+let isAlive = false;
 let gameOver = false;
 let playerSum = 0;
 let dealerSum = 0;
@@ -69,8 +69,6 @@ function displayRandomCards(event) {
         card.classList.add('card');
         card.classList.add('suit');
         card.classList.add(deck[i].Suit);
-        console.log(event.target.value);
-
         if (gameOver === false && event.target.value === 'Deal') {
             test2.appendChild(card);
             playerSum += c1.NumberV;
@@ -99,6 +97,7 @@ function dealHands() {
         let firstCard = displayRandomCards(event);
         let secondCard = displayRandomCards(event);
         stillAlive();
+        console.log(gameOver);
     }
 }
 
@@ -116,20 +115,24 @@ function newCard() {
 // When called this function will provide the dealer with 2 cards, this executes after the player presses the stand button.
 
 function dealersTurn() {
+    gameOver = true;
     displayRandomCards(event);
     displayRandomCards(event);
     for (var i = 0; i < 20; i++) {
         if (dealerSum <= 15) {
             displayRandomCards(event);
         }
+
     }
     dealerPlayer();
+    return gameOver;
 }
 
 
 // This function prints out the winner between dealer and player
 
 function dealerPlayer() {
+    isAlive = false;
     if (dealerSum > playerSum && dealerSum < 21) {
         message1 = 'PLAYER LOST';
     } else if (dealerSum > 21 && playerSum > 21) {
@@ -144,6 +147,8 @@ function dealerPlayer() {
         message1 = 'PLAYER LOST';
     } else if (dealerSum === 21 && playerSum < 21) {
         message1 = 'PLAYER LOST';
+    } else {
+        message1 = 'No hands dealt';
     }
     messageEl2.textContent = message1;
 }
@@ -192,10 +197,6 @@ function refresh() {
 function load() {
     deck = getDeck();
     shuffle();
-    // getRandomCard();
-
-    // renderDeck();
-    // displayRandomCards()
 }
 
 window.addEventListener('load', load);
