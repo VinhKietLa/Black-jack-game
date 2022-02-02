@@ -1,6 +1,21 @@
 const database = firebase.database();
 const rootRef = database.ref('users');
 
+let playerTitle = document.getElementById('playerName');
+
+// rootRef.on('child_added',  => {
+//     let playerTitle = snap.val();
+// });
+
+console.log(rootRef);
+
+rootRef.on('child_added', (snapshot) => {
+    const newPost = snapshot.val();
+    console.log(newPost);
+    console.log(newPost.first_name);
+    playerTitle.innerHTML = newPost.first_name;
+  });
+
 // Creates array to store the card icons, suits and integers for each card.
 
 let cards = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
