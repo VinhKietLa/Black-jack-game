@@ -1,3 +1,6 @@
+const database = firebase.database();
+const rootRef = database.ref('users');
+
 // Creates array to store the card icons, suits and integers for each card.
 
 let cards = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
@@ -17,6 +20,9 @@ function getDeck() {
     }
     return deck;
 }
+
+let deck = getDeck();
+
 
 // This function loops through 1000 times and generates a random number between 1-52 and swaps the location of two object pair and executes the function that shows the cards on the page.
 
@@ -51,7 +57,7 @@ function displayRandomCards(event) {
 
     let c1 = deck[firstCard];
 
-    let newArray = [];
+    let newArray = []; 
     newArray.push(c1)
     for (let i = 0; i < newArray.length; i++) {
         var card = document.createElement("div");
@@ -129,10 +135,10 @@ function dealersTurn() {
     return gameOver;
 }
 
-
 // This function prints out the winner between dealer and player
 
 function dealerPlayer() {
+    let message1 = '';
     isAlive = false;
     if (dealerSum > playerSum && dealerSum < 21) {
         message1 = 'PLAYER LOST';
@@ -151,13 +157,15 @@ function dealerPlayer() {
     } else {
         message1 = 'No hands dealt';
     }
-    messageEl2.textContent = message1;
+   return messageEl2.textContent = message1;
 }
 
 // This function prints out a message for the player
 
 
 function stillAlive() {
+    let messageEl = document.getElementById('messageSum');
+    let message = '';
     if (playerSum <= 20) {
         message = "Do you want to draw a new card? 🙂"
         gameOver = false;
@@ -172,7 +180,7 @@ function stillAlive() {
         gameOver = true;
         dealersTurn();
     }
-    messageEl.textContent = message;
+    return messageEl.textContent = message;
 }
 
 //Event listener for UI buttons
@@ -194,11 +202,12 @@ refreshbtn.addEventListener('click', (refresh));
 // This executes the functions when the page loads
 
 function load() {
+    console.log('Did this run?');
     deck = getDeck();
     shuffle();
 }
 
-window.addEventListener('load', load);
+// window.addEventListener('load', load);
 
 function refresh() {
     location.reload();
