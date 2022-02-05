@@ -222,7 +222,7 @@ function load() {
     shuffle();
 }
 
-// window.addEventListener('load', load);
+window.addEventListener('load', load);
 
 function refresh() {
     location.reload();

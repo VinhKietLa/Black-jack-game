@@ -30,7 +30,7 @@ a:hover {
 #inputname {
   font-family: Pokemon-text;
   color: black;
-  margin-top: 200px;
+  margin-top: 400px;
   animation: bounce 1s infinite alternate;
   -webkit-animation: bounce 1s infinite alternate;
 }
@@ -72,20 +72,21 @@ a:hover {
   margin-top: 250px;
 }
 
+.buttonblock {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
 .redyes {
   color: #ff0000 !important;
   font-family: Pokemon-text;
   background-color: rgba(0, 0, 0, 0.1) !important;
-  margin-top: 10px;
-  margin-left: 10px;
 }
 
 .blueno {
   color: #3c5aa6 !important;
   font-family: Pokemon-text;
   background-color: rgba(0, 0, 0, 0.1) !important;
-  margin-top: 10px;
-  margin-left: 10px;
 }
 
 .card {
