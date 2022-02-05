@@ -13,20 +13,24 @@ body {
   background-size: cover;
 }
 
-#main-title {
+#main-title a {
   font-family: "Pokemon-title";
-  color: #2a75bb;
+  color: #ffcb05;
+  -webkit-text-stroke: 2px #2a75bb;
 }
 
-.pokemon-title {
-  background-color: #ffcb05;
+a:link,
+a:visited,
+a:hover {
+  font-family: "Pokemon-title";
+  color: #ffcb05;
 }
 
 #pressstart,
 #inputname {
   font-family: Pokemon-text;
   color: black;
-  margin-top: 400px;
+  margin-top: 200px;
   animation: bounce 1s infinite alternate;
   -webkit-animation: bounce 1s infinite alternate;
 }
@@ -65,22 +69,23 @@ body {
 }
 
 #mainc {
-  margin-top: 400px;
+  margin-top: 250px;
 }
 
-.buttonblock {
-  margin-top: 30px;
+.redyes {
+  color: #ff0000 !important;
+  font-family: Pokemon-text;
+  background-color: rgba(0, 0, 0, 0.1) !important;
+  margin-top: 10px;
+  margin-left: 10px;
 }
 
-.buttonblock .redyes {
-  color: #ff0000;
+.blueno {
+  color: #3c5aa6 !important;
   font-family: Pokemon-text;
-  background-color: rgba(0, 0, 0, 0.1);
-}
-.buttonblock .blueno {
-  color: #3c5aa6;
-  font-family: Pokemon-text;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.1) !important;
+  margin-top: 10px;
+  margin-left: 10px;
 }
 
 .card {
@@ -138,6 +143,10 @@ body {
 
 .user {
   padding-top: 50px;
+}
+
+audio::-webkit-media-controls-panel {
+  background-color: #56aeff;
 }
 
 /*# sourceMappingURL=mysassstyles.css.map */
