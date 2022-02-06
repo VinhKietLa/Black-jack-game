@@ -64,8 +64,16 @@ a:hover {
 #inputname,
 #hit,
 #stand,
-#deal {
+#deal,
+#dealerName,
+#playerName,
+#winnerMessage {
   font-family: Pokemon-text;
+}
+
+#winnerMessage {
+  margin-top: 150px;
+  margin-bottom: 150px;
 }
 
 #mainc {
@@ -134,12 +142,13 @@ a:hover {
 
 .dealerdiv {
   padding-bottom: 470px !important;
-  height: 500px;
+  height: 700px;
 }
 
 .dealerdiv2 {
+  margin-top: 150px;
   padding-bottom: 310px !important;
-  height: 500px;
+  height: 700px;
 }
 
 .user {

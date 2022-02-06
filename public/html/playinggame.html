@@ -21,8 +21,9 @@
        initialize the SDK after all desired features are loaded, set useEmulator to false
        to avoid connecting the SDK to running emulators.
      -->
-    <script defer src="/__/firebase/init.js?useEmulator=false"></script>
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
 </head>
+
 <body>
     <section class="hero pokemon-title">
         <div class="hero-body">
@@ -32,62 +33,66 @@
         </div>
     </section>
 
-<div class="tile is-ancestor">
-    <div class="tile is-12 is-vertical">
-        <div class="tile is-parent is-vertical dealerdiv">
-            <div class="dealerdeck">
-                <h1 id="dealerName" class="title">Dealers Hand</h1>
-                <div id="dealercard1" class="tile is-justify-content-center"></div>
-                <p id="messageSum2" class="is-size-3"></p>
-                <p id="cardSum2" class="is-size-3"></p>
+    <div class="tile is-ancestor">
+        <div class="tile is-12 is-vertical">
+            <div class="tile is-parent is-vertical dealerdiv">
+                <div class="dealerdeck">
+                    <h1 id="dealerName" class="title"><img src="../Images/arbok.ico">Team Rocket<img
+                            src="../Images/weezing.ico"></h1>
+                    <div id="dealercard1" class="tile is-justify-content-center"></div>
+                    <p id="messageSum2" class="is-size-3"></p>
+                    <p id="cardSum2" class="is-size-3"></p>
+                </div>
+
+                <div class="tile is-chid is-justify-content-center">
+                    <h1 id="winnerMessage" class="is-size-2"></h1>
+                </div>
+
+            </div>
+            <div class="tile is-parent is-vertical">
+                <div class="tile deck is-child dealerdiv2">
+                    <h1 id="playerName" class="title">Players Hand</h1>
+                    <p id="messageSum" class="is-size-3"></p>
+                    <p id="cardSum" class="is-size-3"></p>
+                    <div id="deck2"></div>
+                    <div class="test2 tile is-justify-content-center">
+
+                    </div>
+                    <div class="tile is-child user buttons">
+                        <input id="deal" class="button" type="submit" value="Deal">
+                        <input id="hit" class="button" type="submit" value="Hit">
+                        <input id="stand" class="button stand" type="submit" value="Stand">
+
+                    </div>
+                </div>
             </div>
 
-
         </div>
-        <div class="tile is-parent is-vertical">
-            <div class="tile deck is-child dealerdiv2">
-                <h1 id="playerName" class="title">Players Hand</h1>
-                <p id="messageSum" class="is-size-3"></p>
-                <p id="cardSum" class="is-size-3"></p>
-                <div id="deck2"></div>
-                <div class="test2 tile is-justify-content-center">
-
-                </div>
-                <div class="tile is-child user buttons">
-                    <input id="deal" class="button" type="submit" value="Deal">
-                    <input id="hit" class="button" type="submit" value="Hit">
-                    <input id="stand" class="button stand" type="submit" value="Stand">
-                    <input id="refresh" class="button refresh" type="submit" value="Refresh">
-
-                </div>
-            </div>
-        </div>
-
     </div>
-</div>
-<script type="module">
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js";
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
 
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    const firebaseConfig = {
-        apiKey: "AIzaSyCj62PdhWimStZgYllObqYs5npS2uo1vBg",
-        authDomain: "vinh-blackjack-2ea9b.firebaseapp.com",
-        databaseURL: "https://vinh-blackjack-2ea9b-default-rtdb.firebaseio.com",
-        projectId: "vinh-blackjack-2ea9b",
-        storageBucket: "vinh-blackjack-2ea9b.appspot.com",
-        messagingSenderId: "884517601777",
-        appId: "1:884517601777:web:07ab9cf0cd7f09b5aa4450",
-        measurementId: "G-MNDJ4FNEB0"
-    };
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-</script>
-<script type="module" src="../index.js"></script>
-<!-- <script type="module" src="../JS/firebase.js"></script> -->
-</script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyCj62PdhWimStZgYllObqYs5npS2uo1vBg",
+            authDomain: "vinh-blackjack-2ea9b.firebaseapp.com",
+            databaseURL: "https://vinh-blackjack-2ea9b-default-rtdb.firebaseio.com",
+            projectId: "vinh-blackjack-2ea9b",
+            storageBucket: "vinh-blackjack-2ea9b.appspot.com",
+            messagingSenderId: "884517601777",
+            appId: "1:884517601777:web:07ab9cf0cd7f09b5aa4450",
+            measurementId: "G-MNDJ4FNEB0"
+        };
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+    </script>
+    <script type="module" src="../index.js"></script>
+    <!-- <script type="module" src="../JS/firebase.js"></script> -->
+    </script>
 </body>
+
 </html>

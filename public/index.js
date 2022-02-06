@@ -7,12 +7,9 @@ let playerTitle = document.getElementById('playerName');
 //     let playerTitle = snap.val();
 // });
 
-console.log(rootRef);
 
 rootRef.on('child_added', (snapshot) => {
     const newPost = snapshot.val();
-    console.log(newPost);
-    console.log(newPost.first_name);
     playerTitle.innerHTML = newPost.first_name;
   });
 
@@ -33,23 +30,31 @@ function getDeck() {
             deck.push(card);
         }
     }
+    console.log(deck);
     return deck;
 }
 
 let deck = getDeck();
 
 
-// This function loops through 1000 times and generates a random number between 1-52 and swaps the location of two object pair and executes the function that shows the cards on the page.
+// This function loops through 2000 times and generates a random number between 1-52 and swaps the location of two object pair and executes the function that shows the cards on the page.
 
 function shuffle() {
+    console.log(deck);
     // for 1000 turns
     // switch the values of two random cards
     for (let i = 0; i < 2000; i++) {
         let location1 = Math.floor((Math.random() * deck.length));
         let location2 = Math.floor((Math.random() * deck.length));
+        let location3 = Math.floor((Math.random() * deck.length));
+        let location4 = Math.floor((Math.random() * deck.length));
+
         let tmp = deck[location1];
         deck[location1] = deck[location2];
         deck[location2] = tmp;
+        let tmp2 = deck[location3];
+        deck[location3] = deck[location4];
+        deck[location3] = tmp2;
     }
 }
 
@@ -62,33 +67,42 @@ let dealerSum = 0;
 let cardSum = document.querySelector('#cardSum');
 let cardSum2 = document.querySelector('#cardSum2');
 let messageEl = document.getElementById('messageSum');
-let messageEl2 = document.getElementById('messageSum2');
+let messageEl2 = document.getElementById('winnerMessage');
 let smokey = document.getElementById('dealercard1');
 
 function displayRandomCards(event) {
     let smokey = document.getElementById('dealercard1');
     let test2 = document.querySelector('.test2');
     let firstCard = Math.floor((Math.random() * deck.length));
+    let secondCard = Math.floor((Math.random() * deck.length));
 
     let c1 = deck[firstCard];
-
+    let c2 = deck[secondCard];
     let newArray = []; 
-    newArray.push(c1)
+    newArray.push(c1);
+    newArray.push(c2);
+    console.log(newArray);
     for (let i = 0; i < newArray.length; i++) {
         var card = document.createElement("div");
         var icon = '';
-        if (newArray[i].Suit == 'hearts')
+        console.log(newArray[i].Suit)
+        if (newArray[i].Suit === 'hearts'){
             icon = '&hearts;';
-        else if (newArray[i].Suit == 'spades')
+        }
+        else if (newArray[i].Suit === 'spades') {
             icon = '&spades;';
-        else if (newArray[i].Suit == 'diamonds')
+        }
+        else if (newArray[i].Suit === 'diamonds') {
             icon = '&diams;';
-        else
+        }
+        else {
             icon = '&clubs;';
+        }
         card.innerHTML = newArray[i].Value + '' + icon;
         card.classList.add('card');
-        card.classList.add('suit');
-        card.classList.add(deck[i].Suit);
+        card.classList.add(newArray[i].Suit);
+
+        console.log(card);        
         if (gameOver === false && event.target.value === 'Deal') {
             test2.appendChild(card);
             playerSum += c1.NumberV;
@@ -138,6 +152,7 @@ function newCard() {
 
 function dealersTurn() {
     gameOver = true;
+    stillAlive();
     displayRandomCards(event);
     displayRandomCards(event);
     for (var i = 0; i < 20; i++) {
@@ -156,21 +171,21 @@ function dealerPlayer() {
     let message1 = '';
     isAlive = false;
     if (dealerSum > playerSum && dealerSum < 21) {
-        message1 = 'PLAYER LOST';
+        message1 = 'PLAYER LOST!';
     } else if (dealerSum > 21 && playerSum > 21) {
-        message1 = 'BOTH PLAYERS LOST';
+        message1 = 'BOTH PLAYERS LOST!';
     } else if (dealerSum < playerSum && playerSum <= 21) {
-        message1 = 'PLAYER WINS';
+        message1 = 'PLAYER WINS!';
     } else if (dealerSum === playerSum) {
-        message1 = 'TIE BREAKER';
+        message1 = 'TIE BREAKER!';
     } else if (dealerSum > 21 && playerSum < 21) {
-        message1 = 'PLAYER WINS';
+        message1 = 'PLAYER WINS!';
     } else if (dealerSum < playerSum && playerSum > 21) {
-        message1 = 'PLAYER LOST';
+        message1 = 'PLAYER LOST!';
     } else if (dealerSum === 21 && playerSum < 21) {
-        message1 = 'PLAYER LOST';
+        message1 = 'PLAYER LOST!';
     } else {
-        message1 = 'No hands dealt';
+        message1 = 'No hands dealt!';
     }
    return messageEl2.textContent = message1;
 }
@@ -181,7 +196,10 @@ function dealerPlayer() {
 function stillAlive() {
     let messageEl = document.getElementById('messageSum');
     let message = '';
-    if (playerSum <= 20) {
+    if (gameOver === true){ 
+        message = '';
+    }
+    else if (playerSum <= 20) {
         message = "Do you want to draw a new card? 🙂"
         gameOver = false;
     } else if (playerSum === 21) {
@@ -212,22 +230,15 @@ hitbtn.style.display = 'none';
 standbtn.addEventListener('click', (dealersTurn));
 standbtn.style.display = 'none';
 
-refreshbtn.addEventListener('click', (refresh));
 
 // This executes the functions when the page loads
 
 function load() {
-    console.log('Did this run?');
     deck = getDeck();
     shuffle();
 }
 
 window.addEventListener('load', load);
-
-function refresh() {
-    location.reload();
-}
-
 
 
 // let sum = 0;
