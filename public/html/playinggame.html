@@ -44,14 +44,45 @@
                     <p id="cardSum2" class="is-size-3"></p>
                 </div>
 
-                <div class="tile is-chid is-justify-content-center">
+                <div class="tile is-parent is-justify-content-center">
                     <h1 id="winnerMessage" class="is-size-2"></h1>
+                </div>
+
+                <div class="tile wager-options is-child is-size-8">
+                    <p>Select your bet below</p>
+                    <figure class="tile is-justify-content-center mt-4 is-200x200">
+                        <div class="img-hover-zoom">
+                        <a href="#" id="chip-10"><img src="/Images/10.png"
+                                class="wager wager-clickable "></a>
+                        </div>
+                        <div class="img-hover-zoom">
+                        <a href="#" id="chip-25"><img src="/Images/25.png"
+                                class="wager wager-clickable "></a>
+                        </div>
+                        <div class="img-hover-zoom">
+                        <a href="#" id="chip-50"><img src="/Images/50.png"
+                                class="wager wager-clickable "></a>
+                        </div>
+                        <div class="img-hover-zoom">
+                        <a href="#" id="chip-100"><img src="/Images/100.png"
+                                class="wager wager-clickable"></a>
+                        </div>
+                    </figure>
+                    <br>
+                    <div class="tile is-justify-content-center ">
+                        <p class="current-wager mr-4">0</p>
+                        <img src="/Images/poke-dollar.png" class="wager-small image is-16x16">
+                        <p class="current-chip-balance ml-1">500</p>
+                        <br>
+                    </div>
+                    <button id="start-game-button">Play</button>
+
                 </div>
 
             </div>
             <div class="tile is-parent is-vertical">
                 <div class="tile deck is-child dealerdiv2">
-                    <h1 id="playerName" class="title">Players Hand</h1>
+                    <h1 id="playerName" class="title"></h1>
                     <p id="messageSum" class="is-size-3"></p>
                     <p id="cardSum" class="is-size-3"></p>
                     <div id="deck2"></div>

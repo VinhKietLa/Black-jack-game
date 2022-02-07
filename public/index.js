@@ -7,11 +7,10 @@ let playerTitle = document.getElementById('playerName');
 //     let playerTitle = snap.val();
 // });
 
-
 rootRef.on('child_added', (snapshot) => {
     const newPost = snapshot.val();
     playerTitle.innerHTML = newPost.first_name;
-  });
+});
 
 // Creates array to store the card icons, suits and integers for each card.
 
@@ -19,6 +18,7 @@ let cards = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 let suits = ["diamonds", "hearts", "spades", "clubs"];
 let numbervalue = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 let cardz = [];
+let balance = 100;
 // This function loops through each card and suit and creates an object e.g [{value: 'A', Suit: 'Spades', NumberV: integer}] and returns the 3 values in the variable deck.
 
 function getDeck() {
@@ -78,7 +78,7 @@ function displayRandomCards(event) {
 
     let c1 = deck[firstCard];
     let c2 = deck[secondCard];
-    let newArray = []; 
+    let newArray = [];
     newArray.push(c1);
     newArray.push(c2);
     console.log(newArray);
@@ -86,7 +86,7 @@ function displayRandomCards(event) {
         var card = document.createElement("div");
         var icon = '';
         console.log(newArray[i].Suit)
-        if (newArray[i].Suit === 'hearts'){
+        if (newArray[i].Suit === 'hearts') {
             icon = '&hearts;';
         }
         else if (newArray[i].Suit === 'spades') {
@@ -102,7 +102,7 @@ function displayRandomCards(event) {
         card.classList.add('card');
         card.classList.add(newArray[i].Suit);
 
-        console.log(card);        
+        console.log(card);
         if (gameOver === false && event.target.value === 'Deal') {
             test2.appendChild(card);
             playerSum += c1.NumberV;
@@ -131,9 +131,9 @@ function dealHands() {
         let firstCard = displayRandomCards(event);
         let secondCard = displayRandomCards(event);
         stillAlive();
-        dealbtn.style.display ='none';
-        hitbtn.style.display ='inline';
-        standbtn.style.display ='inline';
+        dealbtn.style.display = 'none';
+        hitbtn.style.display = 'inline';
+        standbtn.style.display = 'inline';
     }
 }
 
@@ -152,16 +152,23 @@ function newCard() {
 
 function dealersTurn() {
     gameOver = true;
+    if(gameOver === false){
     stillAlive();
     displayRandomCards(event);
     displayRandomCards(event);
-    for (var i = 0; i < 20; i++) {
-        if (dealerSum <= 15) {
-            displayRandomCards(event);
-        }
+    }
+    else if (gameOver === true) {
 
+        for (var i = 0; i < 20; i++) {
+            if (dealerSum <= 15) {
+                displayRandomCards(event);
+            }
+
+        }
     }
     dealerPlayer();
+    hitbtn.style.display = 'none';
+    standbtn.style.display = 'none';
     return gameOver;
 }
 
@@ -178,7 +185,7 @@ function dealerPlayer() {
         message1 = 'PLAYER WINS!';
     } else if (dealerSum === playerSum) {
         message1 = 'TIE BREAKER!';
-    } else if (dealerSum > 21 && playerSum < 21) {
+    } else if (dealerSum > 21 && playerSum <= 21) {
         message1 = 'PLAYER WINS!';
     } else if (dealerSum < playerSum && playerSum > 21) {
         message1 = 'PLAYER LOST!';
@@ -187,25 +194,28 @@ function dealerPlayer() {
     } else {
         message1 = 'No hands dealt!';
     }
-   return messageEl2.textContent = message1;
+    return messageEl2.textContent = message1;
 }
 
 // This function prints out a message for the player
 
 
 function stillAlive() {
+    console.log('poo');
     let messageEl = document.getElementById('messageSum');
     let message = '';
-    if (gameOver === true){ 
-        message = '';
-    }
-    else if (playerSum <= 20) {
+    // if (gameOver === true){ 
+    //     message = '';
+    // }
+    // else 
+    if (playerSum <= 20) {
         message = "Do you want to draw a new card? 🙂"
         gameOver = false;
     } else if (playerSum === 21) {
         message = "Wohoo! You've got Blackjack! 🥳"
-        hasBlackJack = true;
+        // hasBlackJack = true;
         gameOver = true;
+        dealersTurn();
     } else if (playerSum > 21) {
         console.log('executed')
         message = "You're out off the game! 😭"
@@ -225,6 +235,7 @@ let refreshbtn = document.getElementById('refresh');
 
 
 dealbtn.addEventListener('click', (dealHands));
+dealbtn.style.display ='none';
 hitbtn.addEventListener('click', (newCard));
 hitbtn.style.display = 'none';
 standbtn.addEventListener('click', (dealersTurn));
@@ -239,93 +250,3 @@ function load() {
 }
 
 window.addEventListener('load', load);
-
-
-// let sum = 0;
-// console.log(sum);
-// let isAlive = false;
-// let hasBlackJack = false;
-// let message = ''
-// let messageEl = document.getElementById('message-el');
-// let sumEl = document.getElementById('sum-el');
-// let cardsEl = document.getElementById('cards-el');
-// let newcard = document.getElementById('newcard');
-// let startgame = document.getElementById('startgame');
-// let gameOver = false;
-
-
-/*Name page*/
-
-/*This function creates the random cards used for blackjack*/
-
-// function getRandomCard() {
-//     // if 1     -> return 11
-//     // if 11-13 -> return 10
-//     let randomNumer = Math.floor(Math.random() * 13) + 1
-//     if (randomNumer > 10) {
-//         return 10
-//     } else if (randomNumer === 1) {
-//         return 11
-//     } else {
-//         return randomNumer
-//     }
-// }
-
-
-/*This executes the game when the user presses on the start game button*/
-
-// function startGame() {
-//     if (gameOver === false) {
-//     isAlive = true;
-//     let firstCard = getRandomCard();
-//     let secondCard = getRandomCard();
-//     cards.push(firstCard);
-//     cards.push(secondCard);
-//     sum = firstCard + secondCard;
-//     renderGame();
-//     }
-// }
-
-// startgame.addEventListener('click', (startGame));
-
-
-/*This renders the game and displays the cards and sum*/
-// function renderGame() {
-//     console.log(sum);
-//     console.log(sum);
-//     cardsEl.textContent = "Cards: ";
-
-//     for (let i = 0; i < cards.length; i++) {
-//         cardsEl.textContent += " " + cards[i] + ' ';
-//     }
-
-//     sumEl.textContent = "Sum: " + sum
-
-//     if (sum <= 20) {
-//         message = "Do you want to draw a new card? 🙂"
-//         console.log(cards);
-//         gameOver = true;
-//     } else if (sum === 21) {
-//         message = "Wohoo! You've got Blackjack! 🥳"
-//         hasBlackJack = true;
-//         gameOver = true;  
-//     } else {
-//         message = "You're out off the game! 😭"
-//         isAlive = false;
-//         gameOver = true;  
-//     }
-//     messageEl.textContent = message;
-
-// }
-
-/*This function draws a new card*/
-// function newCard() {
-//     if (isAlive === true && hasBlackJack === false){
-//     console.log('Drawing a new card from the deck');
-//     let newdraw = getRandomCard();
-//     sum += newdraw;
-//     cards.push(newdraw);
-//     renderGame();
-//     };
-// }
-// newcard.addEventListener('click', (newCard));
