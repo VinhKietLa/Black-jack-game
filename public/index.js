@@ -152,10 +152,10 @@ function newCard() {
 
 function dealersTurn() {
     gameOver = true;
-    if(gameOver === false){
-    stillAlive();
-    displayRandomCards(event);
-    displayRandomCards(event);
+    if (gameOver === false) {
+        stillAlive();
+        displayRandomCards(event);
+        displayRandomCards(event);
     }
     else if (gameOver === true) {
 
@@ -235,7 +235,7 @@ let refreshbtn = document.getElementById('refresh');
 
 
 dealbtn.addEventListener('click', (dealHands));
-dealbtn.style.display ='none';
+dealbtn.style.display = 'none';
 hitbtn.addEventListener('click', (newCard));
 hitbtn.style.display = 'none';
 standbtn.addEventListener('click', (dealersTurn));
@@ -250,3 +250,37 @@ function load() {
 }
 
 window.addEventListener('load', load);
+
+//wager options
+
+const chip10 = document.getElementById('chip-10');
+const chip25 = document.getElementById('chip-25');
+const chip50 = document.getElementById('chip-50');
+const chip100 = document.getElementById('chip-100');
+const startGameBtn = document.getElementById('start-game-button');
+const currentwager = document.getElementsByClassName('current-wager')[0];
+let wager = 0;
+
+
+[chip10, chip25, chip50, chip100].forEach((element) => {
+    element.addEventListener('click', (e) => {
+        if (element.id === 'chip-10') {
+            currentwager.innerHTML = 10;
+        } else if (element.id === 'chip-25') {
+            currentwager.innerHTML = 25;
+        } else if (element.id === 'chip-50') {
+            currentwager.innerHTML = 50;
+        } else if (element.id === 'chip-100') {
+            currentwager.innerHTML = 100;
+        } else {
+            currentwager.innerHTML = 0;
+        }
+    });
+});
+
+
+startGameBtn.addEventListener('click', (e) => {
+    if (parseInt(currentwager.innerHTML[0]) === 0) {
+        alert('Please select a bet');
+    }
+});
