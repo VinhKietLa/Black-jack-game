@@ -34,9 +34,9 @@
     </section>
 
     <div class="tile is-ancestor">
-        <div class="tile is-12 is-vertical">
+        <div class="tile is-12 is-vertical" id="playchangedisplay">
             <div class="tile is-parent is-vertical dealerdiv">
-                <div class="dealerdeck">
+                <div class="dealerdeck tile is-child">
                     <h1 id="dealerName" class="title"><img src="../Images/arbok.ico">Team Rocket<img
                             src="../Images/weezing.ico"></h1>
                     <div id="dealercard1" class="tile is-justify-content-center"></div>
@@ -44,32 +44,29 @@
                     <p id="cardSum2" class="is-size-3"></p>
                 </div>
 
+
                 <div class="tile is-parent is-justify-content-center">
                     <h1 id="winnerMessage" class="is-size-2"></h1>
                 </div>
 
-                <div class="tile wager-options is-child is-size-8">
+                <div class="tile wager-options is-child is-size-10 " id='wagerchips'>
                     <p>Select your bet below</p>
                     <figure class="tile is-justify-content-center mt-4 is-200x200">
                         <div class="img-hover-zoom">
-                        <a href="#" id="chip-10"><img src="/Images/10.png"
-                                class="wager wager-clickable "></a>
+                            <a href="#" id="chip-10"><img src="/Images/10.png" class="wager wager-clickable "></a>
                         </div>
                         <div class="img-hover-zoom">
-                        <a href="#" id="chip-25"><img src="/Images/25.png"
-                                class="wager wager-clickable "></a>
+                            <a href="#" id="chip-25"><img src="/Images/25.png" class="wager wager-clickable "></a>
                         </div>
                         <div class="img-hover-zoom">
-                        <a href="#" id="chip-50"><img src="/Images/50.png"
-                                class="wager wager-clickable "></a>
+                            <a href="#" id="chip-50"><img src="/Images/50.png" class="wager wager-clickable "></a>
                         </div>
                         <div class="img-hover-zoom">
-                        <a href="#" id="chip-100"><img src="/Images/100.png"
-                                class="wager wager-clickable"></a>
+                            <a href="#" id="chip-100"><img src="/Images/100.png" class="wager wager-clickable"></a>
                         </div>
                     </figure>
                     <br>
-                    <div class="tile is-justify-content-center ">
+                    <div class="tile is-justify-content-center wagermenu">
                         <p class="current-wager mr-4">0</p>
                         <img src="/Images/poke-dollar.png" class="wager-small image is-16x16">
                         <p class="current-chip-balance ml-1">500</p>
@@ -89,17 +86,30 @@
                     <div class="test2 tile is-justify-content-center">
 
                     </div>
-                    <div class="tile is-child user buttons">
+                    <!-- <div class="tile is-child user buttons">
                         <input id="deal" class="button" type="submit" value="Deal">
                         <input id="hit" class="button" type="submit" value="Hit">
+                        <input id="double" class="button" type="submit" value="Double">
                         <input id="stand" class="button stand" type="submit" value="Stand">
-
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
         </div>
+        <div class="tile is-parent is-2 is-vertical tester is-flex">
+            <p class=" playingwager tile is-child is-vertical is-flex-grow-0">Wager:</p>
+            <p class=" playingbalance tile is-child is-vertical is-flex-grow-0">Balance:</p>
+            <div class="tile is-child user buttons is-vertical">
+                <input id="deal" class="button is-flex-grow-2" type="submit" value="Deal">
+                <input id="hit" class="button" type="submit" value="Hit">
+                <input id="double" class="button" type="submit" value="Double">
+                <input id="stand" class="button stand" type="submit" value="Stand">
+            </div>
+        </div>
+
     </div>
+
+
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js";

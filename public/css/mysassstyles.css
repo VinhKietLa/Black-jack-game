@@ -63,12 +63,15 @@ a:hover {
 
 #inputname,
 #hit,
+#double,
 #stand,
 #deal,
 #dealerName,
 #playerName,
 #winnerMessage,
-.wager-options {
+.wager-options,
+.playingwager,
+.playingbalance {
   font-family: Pokemon-text;
 }
 
@@ -133,7 +136,8 @@ a:hover {
   background-color: red;
 }
 
-#stand {
+#stand,
+#double {
   background-color: #6992f2;
 }
 

@@ -18,7 +18,6 @@ let cards = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 let suits = ["diamonds", "hearts", "spades", "clubs"];
 let numbervalue = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 let cardz = [];
-let balance = 100;
 // This function loops through each card and suit and creates an object e.g [{value: 'A', Suit: 'Spades', NumberV: integer}] and returns the 3 values in the variable deck.
 
 function getDeck() {
@@ -30,7 +29,6 @@ function getDeck() {
             deck.push(card);
         }
     }
-    console.log(deck);
     return deck;
 }
 
@@ -40,7 +38,6 @@ let deck = getDeck();
 // This function loops through 2000 times and generates a random number between 1-52 and swaps the location of two object pair and executes the function that shows the cards on the page.
 
 function shuffle() {
-    console.log(deck);
     // for 1000 turns
     // switch the values of two random cards
     for (let i = 0; i < 2000; i++) {
@@ -74,18 +71,15 @@ function displayRandomCards(event) {
     let smokey = document.getElementById('dealercard1');
     let test2 = document.querySelector('.test2');
     let firstCard = Math.floor((Math.random() * deck.length));
-    let secondCard = Math.floor((Math.random() * deck.length));
-
+    // let secondCard = Math.floor((Math.random() * deck.length));
     let c1 = deck[firstCard];
-    let c2 = deck[secondCard];
+    // let c2 = deck[secondCard];
     let newArray = [];
     newArray.push(c1);
-    newArray.push(c2);
-    console.log(newArray);
+    // newArray.push(c2);
     for (let i = 0; i < newArray.length; i++) {
         var card = document.createElement("div");
         var icon = '';
-        console.log(newArray[i].Suit)
         if (newArray[i].Suit === 'hearts') {
             icon = '&hearts;';
         }
@@ -101,16 +95,17 @@ function displayRandomCards(event) {
         card.innerHTML = newArray[i].Value + '' + icon;
         card.classList.add('card');
         card.classList.add(newArray[i].Suit);
-
         console.log(card);
         if (gameOver === false && event.target.value === 'Deal') {
             test2.appendChild(card);
+            console.log(newArray[i].NumberV);
             playerSum += c1.NumberV;
             cardSum.innerHTML = playerSum
-            return playerSum;
+            console.log(playerSum);
+            // return playerSum;
         } else if (gameOver === false && event.target.value === 'Hit') {
             test2.appendChild(card);
-            playerSum += c1.NumberV;
+            playerSum += c1.NumberV++;
             cardSum.innerHTML = playerSum
             return playerSum;
         }
@@ -121,6 +116,7 @@ function displayRandomCards(event) {
             return dealerSum;
         }
     }
+
 }
 
 // When called this function will generate and display two cards for the player.
@@ -128,20 +124,34 @@ function dealHands() {
     if (gameOver === false) {
         shuffle();
         isAlive = true;
-        let firstCard = displayRandomCards(event);
-        let secondCard = displayRandomCards(event);
+        setTimeout(displayRandomCards, 1000, event);
+        setTimeout(hidefirstcard, 1001);
+
+        // console.log(smokey.firstChild.innerHTML);
+        setTimeout(displayRandomCards, 1500, event);
         stillAlive();
         dealbtn.style.display = 'none';
         hitbtn.style.display = 'inline';
+        doublebtn.style.display = 'inline';
         standbtn.style.display = 'inline';
+        playingwager.style.display = 'inline';
+        playingbalance.style.display = 'inline';
     }
+}
+//hides the dealers first card when first dealt.
+function hidefirstcard() {
+    smokey.firstChild.style.display = 'none';
+    var img = document.createElement("img");
+    img.src = "../Images/rearofcard.jpeg";
+    img.width = "95";
+    img.height = "150";
+    smokey.appendChild(img);
 }
 
 // When called this function will provide the player with 1 additional card.
 
 function newCard() {
     if (isAlive === true) {
-        console.log('Drawing a new card from the deck');
         let newdraw = displayRandomCards(event);
         shuffle();
         stillAlive();
@@ -151,25 +161,17 @@ function newCard() {
 // When called this function will provide the dealer with 2 cards, this executes after the player presses the stand button.
 
 function dealersTurn() {
-    gameOver = true;
-    if (gameOver === false) {
-        stillAlive();
-        displayRandomCards(event);
-        displayRandomCards(event);
-    }
-    else if (gameOver === true) {
-
-        for (var i = 0; i < 20; i++) {
-            if (dealerSum <= 15) {
-                displayRandomCards(event);
-            }
-
-        }
-    }
-    dealerPlayer();
+    setTimeout(displayRandomCards, 1000, event);
+    setTimeout(displayRandomCards, 1500, event);
+    console.log(dealerSum);
     hitbtn.style.display = 'none';
+    doublebtn.style.display = 'none';
     standbtn.style.display = 'none';
-    return gameOver;
+}
+
+function dealertotal() {
+    setTimeout(displayRandomCards, 1000, event);
+    setTimeout(displayRandomCards, 1500, event);
 }
 
 // This function prints out the winner between dealer and player
@@ -181,11 +183,11 @@ function dealerPlayer() {
         message1 = 'PLAYER LOST!';
     } else if (dealerSum > 21 && playerSum > 21) {
         message1 = 'BOTH PLAYERS LOST!';
-    } else if (dealerSum < playerSum && playerSum <= 21) {
+    } else if (dealerSum <= playerSum && playerSum <= 21) {
         message1 = 'PLAYER WINS!';
     } else if (dealerSum === playerSum) {
         message1 = 'TIE BREAKER!';
-    } else if (dealerSum > 21 && playerSum <= 21) {
+    } else if (dealerSum >= 21 && playerSum <= 21) {
         message1 = 'PLAYER WINS!';
     } else if (dealerSum < playerSum && playerSum > 21) {
         message1 = 'PLAYER LOST!';
@@ -201,7 +203,6 @@ function dealerPlayer() {
 
 
 function stillAlive() {
-    console.log('poo');
     let messageEl = document.getElementById('messageSum');
     let message = '';
     // if (gameOver === true){ 
@@ -231,13 +232,17 @@ function stillAlive() {
 let dealbtn = document.getElementById('deal');
 let hitbtn = document.getElementById('hit');
 let standbtn = document.getElementById('stand');
-let refreshbtn = document.getElementById('refresh');
+let doublebtn = document.getElementById('double');
 
 
 dealbtn.addEventListener('click', (dealHands));
+doublebtn.addEventListener('click', (dealertotal));
+
 dealbtn.style.display = 'none';
 hitbtn.addEventListener('click', (newCard));
 hitbtn.style.display = 'none';
+doublebtn.addEventListener('click', (doublewager));
+doublebtn.style.display = 'none';
 standbtn.addEventListener('click', (dealersTurn));
 standbtn.style.display = 'none';
 
@@ -258,8 +263,19 @@ const chip25 = document.getElementById('chip-25');
 const chip50 = document.getElementById('chip-50');
 const chip100 = document.getElementById('chip-100');
 const startGameBtn = document.getElementById('start-game-button');
+
+const tester = document.getElementsByClassName('tester')[0];
+tester.style.display = 'none';
+
+const playchangedisplay = document.getElementById('playchangedisplay');
 const currentwager = document.getElementsByClassName('current-wager')[0];
+const playingwager = document.querySelector('.playingwager');
+playingwager.style.display = 'none';
+const playingbalance = document.querySelector('.playingbalance');
+playingbalance.style.display = 'none';
+const wagermenu = document.getElementById('wagerchips');
 let wager = 0;
+let balance = 500;
 
 
 [chip10, chip25, chip50, chip100].forEach((element) => {
@@ -275,12 +291,34 @@ let wager = 0;
         } else {
             currentwager.innerHTML = 0;
         }
+        return currentwager;
     });
 });
 
+function togglePlayScreen() {
+    playchangedisplay.classList.remove('is-12');
+    playchangedisplay.classList.add('is-8');
+}
+
+function doublewager() {
+    console.log(currentwager.innerHTML);
+    let newWager = parseInt(currentwager.innerHTML) * 2;
+    playingwager.innerHTML = 'Wager: $' + newWager;
+}
 
 startGameBtn.addEventListener('click', (e) => {
+
     if (parseInt(currentwager.innerHTML[0]) === 0) {
         alert('Please select a bet');
-    }
+    } else {
+        togglePlayScreen();
+        wagermenu.style.display = 'none';
+        dealbtn.style.display = 'inline-block';
+        playingwager.innerHTML = 'Wager:  $' + currentwager.innerHTML;
+        playingbalance.innerHTML = 'Balance:  $' + balance;
+        let clickEvent = new Event('click');
+        let secondevent = new Event('click');
+        dealbtn.dispatchEvent(clickEvent);
+        doublebtn.dispatchEvent(secondevent);
+    };
 });
