@@ -98,7 +98,7 @@ function displayRandomCards(event) {
             test2.appendChild(card);
             playerSum += c1.NumberV;
             cardSum.innerHTML = playerSum
-            // return playerSum;
+            return playerSum;
         } else if (gameOver === false && event.target.value === 'Hit') {
             test2.appendChild(card);
             playerSum += c1.NumberV++;
@@ -110,10 +110,6 @@ function displayRandomCards(event) {
             console.log(dealerSum);
             dealerSum += c1.NumberV;
             cardSum2.innerHTML = newArray[i].NumberV;
-            dealerhandz.push(dealerSum);
-            console.log(dealerhandz);
-            console.log(c1.NumberV);
-            // gameOver1 = true;
             console.log('Apple');
             return dealerSum;
         }
@@ -173,14 +169,16 @@ function dealersTurn() {
     removeimg.style.display = 'inline';
     let el = document.querySelector('.pokecard');
     el.remove();
+    gameOver = true;
+    stillAlive();
+    if (dealerSum <=17){
     do {
         displayRandomCards(event);
     }
-    while (dealerSum <17)
-
+    while (dealerSum <= 17)
+    }
     cardSum2.innerHTML = dealerSum;
-
-    setTimeout(dealerPlayer, 2000, event);
+    setTimeout(dealerPlayer, 1000);
     console.log(dealerSum);
     console.log(playerSum);
     hitbtn.style.display = 'none';
@@ -252,6 +250,8 @@ function stillAlive() {
         isAlive = false;
         gameOver = true;
         dealersTurn();
+    } else if (gameOver === true) {
+        message = "";
     }
     return messageEl.textContent = message;
 }
