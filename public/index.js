@@ -1,7 +1,6 @@
 // Accesses the firebase realtime DB and sets the username from the name they entered on the whatsmyname page.
 const database = firebase.database();
 const rootRef = database.ref('users');
-
 let playerTitle = document.getElementById('playerName');
 
 // rootRef.on('child_added',  => {
@@ -10,8 +9,19 @@ let playerTitle = document.getElementById('playerName');
 
 rootRef.on('child_added', (snapshot) => {
     const newPost = snapshot.val();
-    playerTitle.innerHTML = newPost.first_name;
+    playerTitle.innerHTML = newPost.First_Name;
+    console.log(newPost);
 });
+
+rootRef.on('child_added', (snapshot) => {
+    const newScore = snapshot.val();
+    let balance = document.querySelector('.current-chip-balance');
+    balance.innerHTML = parseInt(newScore.Balance);
+    playingbalance.innerHTML = 'Balance: $' + newScore.Balance;
+    console.log(newScore);
+});
+
+
 
 // Creates array to store the card icons, suits and integers for each card.
 let cards = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
@@ -64,7 +74,6 @@ let cardSum2 = document.querySelector('#cardSum2');
 let messageEl = document.getElementById('messageSum');
 let messageEl2 = document.getElementById('winnerMessage');
 let smokey = document.getElementById('dealercard1');
-let dealerhandz = [];
 
 function displayRandomCards(event) {
     let smokey = document.getElementById('dealercard1');
@@ -163,6 +172,33 @@ function newCard() {
     };
 }
 
+//This function updates the database with the users new balance based on the game result
+function updatebalance() {
+    if (messageEl2.textContent === 'PLAYER LOST!') {
+        console.log(currentwager.innerHTML);
+        console.log(balance.innerHTML);
+        // balance.innerHTML - currentwager.innerHTML;
+        // let updatedBalance = balance.innerHTML - currentwager.innerHTML;
+        // playingbalance.innerHTML = 'Balance: $' + `${updatedBalance}`;
+        // const newData = {
+        //     Balance: updatedBalance
+        // };
+        // console.log(george);
+        // rootRef.child(george).update(newData);
+        let george = rootRef.orderByChild("Balance").limitToLast(1).on("child_added", function (snapshot) {
+            let kiet = snapshot.key;
+            console.log(kiet);
+            balance.innerHTML - currentwager.innerHTML;
+            let updatedBalance = balance.innerHTML - currentwager.innerHTML;
+            playingbalance.innerHTML = 'Balance: $' + `${updatedBalance}`;
+            const newData = {
+                Balance: updatedBalance
+            };
+            rootRef.child(kiet).update(newData);
+        });
+        // return updatedBalance;
+    }
+}
 // When called this function will provide the dealer with 2 cards, this executes after the player presses the stand button.
 function dealersTurn() {
     let removeimg = document.querySelector('.Ivy');
@@ -171,11 +207,11 @@ function dealersTurn() {
     el.remove();
     gameOver = true;
     stillAlive();
-    if (dealerSum <=17){
-    do {
-        displayRandomCards(event);
-    }
-    while (dealerSum <= 17)
+    if (dealerSum <= 17) {
+        do {
+            displayRandomCards(event);
+        }
+        while (dealerSum <= 17)
     }
     cardSum2.innerHTML = dealerSum;
     setTimeout(dealerPlayer, 1000);
@@ -184,7 +220,7 @@ function dealersTurn() {
     hitbtn.style.display = 'none';
     doublebtn.style.display = 'none';
     standbtn.style.display = 'none';
-    // cardSum2.innerHTML = dealerSum;
+    setTimeout(updatebalance, 1500);
 }
 
 function dealerdeal() {
@@ -203,7 +239,6 @@ function dealDealerHands() {
         setTimeout(displayRandomCards, 1000, event);
         setTimeout(displayRandomCards, 1500, event);
     }
-    // gameOver1 = true;
 };
 
 // This function prints out the winner between dealer and player
@@ -218,15 +253,13 @@ function dealerPlayer() {
         message1 = 'PLAYER WINS!';
     } else if (dealerSum === playerSum) {
         message1 = 'TIE BREAKER!';
-    }
-    else if (dealerSum < playerSum && playerSum > 21) {
+    } else if (dealerSum < playerSum && playerSum > 21) {
         message1 = 'PLAYER LOST!';
     } else if (dealerSum === 21 && playerSum < 21) {
         message1 = 'PLAYER LOST!';
     } else if (dealerSum > 21 && playerSum <= 21) {
         message1 = 'PLAYER WINS!';
-    }
-    else {
+    } else {
         message1 = 'No hands dealt!';
     }
     return messageEl2.textContent = message1;
@@ -269,7 +302,7 @@ drawdealerhands.addEventListener('click', (dealDealerHands));
 dealbtn.style.display = 'none';
 hitbtn.addEventListener('click', (newCard));
 hitbtn.style.display = 'none';
-doublebtn.addEventListener('click', (doublewager));
+// doublebtn.addEventListener('click', (doublewager));
 doublebtn.style.display = 'none';
 standbtn.addEventListener('click', (dealersTurn));
 standbtn.style.display = 'none';
@@ -288,15 +321,14 @@ window.addEventListener('load', load);
 const playingbalance = document.querySelector('.playingbalance');
 playingbalance.style.display = 'none';
 let wager = 0;
-let balance = 500;
-
-
+let balance = document.querySelector('.current-chip-balance');
+balance.innerHTML = parseInt(500);
 //This cycles through the chips and assigns a HTML value;
 const chip10 = document.getElementById('chip-10');
 const chip25 = document.getElementById('chip-25');
 const chip50 = document.getElementById('chip-50');
 const chip100 = document.getElementById('chip-100');
-const currentwager = document.getElementsByClassName('current-wager')[0];
+const currentwager = document.querySelector('.current-wager');
 
 [chip10, chip25, chip50, chip100].forEach((element) => {
     element.addEventListener('click', (e) => {
@@ -319,8 +351,15 @@ const currentwager = document.getElementsByClassName('current-wager')[0];
 const playchangedisplay = document.getElementById('playchangedisplay');
 
 function togglePlayScreen() {
-    playchangedisplay.classList.remove('is-12');
-    playchangedisplay.classList.add('is-8');
+    if (playchangedisplay.classList.contains('is-12')) {
+        playchangedisplay.classList.remove('is-12');
+        playchangedisplay.classList.add('is-8');
+    }
+
+    else if (playchangedisplay.classList.contains('is-8')) {
+        playchangedisplay.classList.remove('is-8');
+        playchangedisplay.classList.add('is-12');
+    };
 }
 
 
@@ -328,11 +367,20 @@ function togglePlayScreen() {
 const playingwager = document.querySelector('.playingwager');
 playingwager.style.display = 'none';
 
-function doublewager() {
-    console.log(currentwager.innerHTML);
-    let newWager = parseInt(currentwager.innerHTML) * 2;
-    playingwager.innerHTML = 'Wager: $' + newWager;
+// function doublewager() {
+//     console.log(currentwager.innerHTML);
+//     currentwager.innerHTML = parseInt(currentwager.innerHTML) * 2;
+//     playingwager.innerHTML = 'Wager: $' + currentwager.innerHTML;
+// }
+
+let playagain = document.getElementById('playagain');
+
+function playAgain() {
+    wagermenu.style.display = 'block';
+    dealbtn.style.display = "none";
 }
+
+playagain.addEventListener('click', (playAgain));
 
 
 //This starts the game after the user has selected a wager and presses play, hides the chip selection too.
@@ -346,11 +394,22 @@ startGameBtn.addEventListener('click', (e) => {
         togglePlayScreen();
         wagermenu.style.display = 'none';
         dealbtn.style.display = 'inline-block';
-        playingwager.innerHTML += 'Wager:  $' + currentwager.innerHTML;
-        playingbalance.innerHTML = 'Balance:  $' + balance;
+        playingwager.innerHTML += parseInt(currentwager.innerHTML);
+        // playingbalance.innerHTML = 'Balance:  $' + parseInt(balance.innerHTML);
         let clickEvent = new Event('click');
         let secondevent = new Event('click');
         dealbtn.dispatchEvent(clickEvent);
         drawdealerhands.dispatchEvent(secondevent);
     };
 });
+
+// let george = rootRef.orderByChild("Balance").limitToLast(1).on("child_added", function (snapshot) {
+//     let kiet = snapshot.key;
+//     console.log(kiet);
+//     balance.innerHTML - currentwager.innerHTML;
+//     let updatedBalance = balance.innerHTML - currentwager.innerHTML;
+//     const newData = {
+//         Balance: 600
+//     };
+//     rootRef.child(kiet).update(newData);
+// });

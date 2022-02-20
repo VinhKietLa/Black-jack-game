@@ -67,9 +67,9 @@
                     </figure>
                     <br>
                     <div class="tile is-justify-content-center wagermenu">
-                        <p class="current-wager mr-4">0</p>
+                        <p class="current-wager mr-4"></p>
                         <img src="/Images/poke-dollar.png" class="wager-small image is-16x16">
-                        <p class="current-chip-balance ml-1">500</p>
+                        <p class="current-chip-balance ml-1">$</p>
                         <br>
                     </div>
                     <button id="start-game-button">Play</button>
@@ -99,12 +99,14 @@
         <div class="tile is-parent is-2 is-vertical tester is-flex">
             <p class=" playingwager tile is-child is-vertical is-flex-grow-0">Wager:</p>
             <p class=" playingbalance tile is-child is-vertical is-flex-grow-0">Balance:</p>
+            <button class="button" id="playagain">Play Again!</button>
             <div class="tile is-child user buttons is-vertical">
                 <input id="deal" class="button is-flex-grow-2" type="submit" value="Deal">
                 <input id="hit" class="button" type="submit" value="Hit">
                 <input id="double" class="button" type="submit" value="Double">
                 <input id="stand" class="button stand" type="submit" value="Stand">
-                <input id="drawdealerhands" class="button drawdealerhands is-hidden" type="submit" value="drawdealerhands">
+                <input id="drawdealerhands" class="button drawdealerhands is-hidden" type="submit"
+                    value="drawdealerhands">
             </div>
         </div>
 
