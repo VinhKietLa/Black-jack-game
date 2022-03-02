@@ -131,8 +131,12 @@
             appId: "1:884517601777:web:07ab9cf0cd7f09b5aa4450",
             measurementId: "G-MNDJ4FNEB0"
         };
-        // Initialize Firebase
+        // Initialize Firebase and make auth
         const app = initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        // update firestore settings
+        app.settings({ timestampsInSnapshots: true});
     </script>
     <script type="module" src="../index.js"></script>
     <!-- <script type="module" src="../JS/firebase.js"></script> -->

@@ -7,7 +7,7 @@
     <!-- update the version number as needed -->
     <script defer src="/__/firebase/9.6.5/firebase-app-compat.js"></script>
     <!-- include only the Firebase features as you need -->
-    <!-- <script defer src="/__/firebase/9.6.5/firebase-auth-compat.js"></script> -->
+    <script defer src="/__/firebase/9.6.5/firebase-auth-compat.js"></script>
     <script defer src="/__/firebase/9.6.5/firebase-database-compat.js"></script>
     <script defer src="/__/firebase/9.6.5/firebase-firestore-compat.js"></script>
     <script defer src="/__/firebase/9.6.5/firebase-functions-compat.js"></script>
@@ -18,7 +18,7 @@
  <script defer src="/__/firebase/9.6.5/firebase-performance-compat.js"></script> -->
     <!-- 
    initialize the SDK after all desired features are loaded, set useEmulator to false
-   to avoid connecting the SDK to running emulators.
+   to avoid 3connecting the SDK to running emulators.
  -->
     <script defer src="/__/firebase/init.js?useEmulator=false"></script>
 
@@ -30,8 +30,106 @@
             <h1 class="title is-1" id="main-title">
                 <a href="../index.html">Vinh's Blackjack Game </a>
             </h1>
+            <!--Login button-->
+            <button class="button" id="btnLogin">Login</button>
+            <!--Login modal-->
+            <div class="modal loginmodal">
+                <div class="modal-background"></div>
+                <div class="modal-content">
+                    <h1 class="is-size-1 title has-text-white">Sign in to Vinh's Blackjack</h1>
+                    <form class="field" id="login-form">
+                        <div class="field">
+                            <p class="control has-icons-left has-icons-right">
+                                <input class="input" id="loginEmail" type="email" placeholder="Email">
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                                <span class="icon is-small is-right">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="field">
+                            <p class="control has-icons-left">
+                                <input class="input" id="loginPassword" type="password" placeholder="Password">
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-lock"></i>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="field">
+                            <button id="form-submit" class="button is-link">Submit</button>
+                            <span class="icon is-small is-left">
+                            </span>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+                <button class="modal-close is-large" aria-label="close"></button>
+            </div>
+            <button class="button" id="btnLogout">Logout</button>
         </div>
     </section>
+
+<!--Sign up modal on launch-->
+
+    <div class="modal is-active" id="signupmodal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <h1 class="is-size-1 title has-text-white">Sign up to play!</h1>
+            <form class="field" id="signup-form">
+                <div class="field">
+                    <p class="control has-icons-left has-icons-right">
+                        <input id="userEmail" type="email" placeholder="Email">
+                        <span class="icon is-small is-left">
+                        </span>
+                        <span class="icon is-small is-right">
+                        </span>
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control has-icons-left">
+                        <input id="userPassword" type="password" placeholder="Password">
+                        <span class="icon is-small is-left">
+                        </span>
+                    </p>
+                </div>
+                <div class="field">
+                    <button id="form-submit" class="button is-link">Submit</button>
+                    <span class="icon is-small is-left">
+                    </span>
+                    </p>
+                </div>
+            </form>
+            <button class="button is-small is-danger" id="existingUser">Already got an account?</button>
+        </div>
+        <button class="modal-close is-large" aria-label="close"></button>
+    </div>
+
+    <!-- <form class="field" id="signup-form">
+        <div class="field">
+            <p class="control has-icons-left has-icons-right">
+                <input id="userEmail" type="email" placeholder="Email">
+                <span class="icon is-small is-left">
+                </span>
+                <span class="icon is-small is-right">
+                </span>
+            </p>
+        </div>
+        <div class="field">
+            <p class="control has-icons-left">
+                <input id="userPassword" type="password" placeholder="Password">
+                <span class="icon is-small is-left">
+                </span>
+            </p>
+        </div>
+        <div class="field">
+            <button id="form-submit" class="button is-link">Submit</button>
+            <span class="icon is-small is-left">
+            </span>
+            </p>
+        </div>
+    </form> -->
 
     <section>
         <container>
@@ -54,6 +152,8 @@
 <script type="module">
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js";
+    import { getAuth } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-auth.js";
+
     // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -72,7 +172,10 @@
 
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
 </script>
 </script>
+<script type="module" src="JS/authentication.js"></script>
 
 </html>

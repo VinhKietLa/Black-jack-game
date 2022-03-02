@@ -184,8 +184,8 @@ function updatebalance() {
         //     Balance: updatedBalance
         // };
         // console.log(george);
-        // rootRef.child(george).update(newData);
-        let george = rootRef.orderByChild("Balance").limitToLast(1).on("child_added", function (snapshot) {
+        // rootRef.child(george).update(newData)
+        let george = rootRef.orderByKey().limitToLast(1).on("child_added", function (snapshot) {
             let kiet = snapshot.key;
             console.log(kiet);
             balance.innerHTML - currentwager.innerHTML;
@@ -376,8 +376,7 @@ playingwager.style.display = 'none';
 let playagain = document.getElementById('playagain');
 
 function playAgain() {
-    wagermenu.style.display = 'block';
-    dealbtn.style.display = "none";
+    location.reload();
 }
 
 playagain.addEventListener('click', (playAgain));
