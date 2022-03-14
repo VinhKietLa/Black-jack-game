@@ -25,6 +25,29 @@
 //     console.log(firebaseUser);
 // })
 
+
+
+//getData
+const db = firebase.firestore();
+db.collection('Users').get().then(snapshot => {
+    setupUsers(snapshot.docs);
+});
+
+const setupUsers = (data) => {
+    data.forEach(doc => {
+        const guide = doc.data();
+        console.log(guide)
+    });
+}
+
+//Listen for auth status changes
+const auth = firebase.auth();
+
+auth.onAuthStateChanged(user => {
+    console.log(user);
+    console.log(user.email);
+});
+
 //modal close applies to all modals
 const modalclose1 = document.querySelectorAll('.modal-close')[0];
 const modalclose2 = document.querySelectorAll('.modal-close')[1];
@@ -47,20 +70,24 @@ modalclose2.addEventListener('click', (closeModal));
 
 const signupForm = document.getElementById("signup-form");
 const signupmodal = document.getElementById("signupmodal");
-const auth = firebase.auth();
 
 signupForm.addEventListener('submit', (e) => {
     // this prevents page refresh after user presses submit
     e.preventDefault();
-
     //get user info from input fields
     const email = signupForm['userEmail'].value;
     const password = signupForm['userPassword'].value;
 
     //Sign up the user with email and pw
     auth.createUserWithEmailAndPassword(email, password).then(cred => {
-    })
-    signupmodal.classList.remove('is-active');
+        return db.collection('users').doc(cred.user.uid).set({
+            Balance: 500,
+            Email: email
+        });
+    }).then(() => {
+        signupmodal.classList.remove('is-active');
+    });
+    // signupmodal.classList.remove('is-active');
 });
 
 //User Logout
@@ -69,9 +96,8 @@ const btnLogout = document.getElementById("btnLogout");
 
 btnLogout.addEventListener('click', (e) => {
     e.preventDefault();
-    auth.signOut().then(() => {
-        console.log('User has signed out');
-    })
+    auth.signOut();
+    console.log('User has logged out');
 });
 
 //User Login
@@ -86,8 +112,6 @@ btnLogin.addEventListener('click', (e) => {
     //get user info from input fields
     const email = loginform['loginEmail'].value;
     const password = loginform['loginPassword'].value;
-
-    console.log(email, password);
 });
 
 loginform.addEventListener('submit', (e) => {

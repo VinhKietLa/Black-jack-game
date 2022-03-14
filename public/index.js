@@ -1,26 +1,58 @@
 // Accesses the firebase realtime DB and sets the username from the name they entered on the whatsmyname page.
-const database = firebase.database();
-const rootRef = database.ref('users');
+// const database = firebase.database();
+// const rootRef = database.ref('users');
+const db = firebase.firestore();
+const auth = firebase.auth();
+
+auth.onAuthStateChanged(user => {
+    if (user) {
+        console.log("User is signed in.")
+      } else {
+        console.log("User is not in.")
+      }
+    console.log(user);
+    console.log(user.email);
+    console.log(user.uid);
+});
 let playerTitle = document.getElementById('playerName');
 
+//REAL TIME DATABASE QUERIES//
 // rootRef.on('child_added',  => {
 //     let playerTitle = snap.val();
 // });
+// Realtime database this gets the first_name of the most recently added name from the db and display it in-game//
+// rootRef.on('child_added', (snapshot) => {
+//     const newPost = snapshot.val();
+//     playerTitle.innerHTML = newPost.First_Name;
+//     console.log(newPost);
+// });
 
-rootRef.on('child_added', (snapshot) => {
-    const newPost = snapshot.val();
-    playerTitle.innerHTML = newPost.First_Name;
-    console.log(newPost);
-});
+//This updates the chick balance on display.
+// rootRef.on('child_added', (snapshot) => {
+//     const newScore = snapshot.val();
+//     let balance = document.querySelector('.current-chip-balance');
+//     balance.innerHTML = parseInt(newScore.Balance);
+//     playingbalance.innerHTML = 'Balance: $' + newScore.Balance;
+//     console.log(newScore);
+// });
 
-rootRef.on('child_added', (snapshot) => {
-    const newScore = snapshot.val();
-    let balance = document.querySelector('.current-chip-balance');
-    balance.innerHTML = parseInt(newScore.Balance);
-    playingbalance.innerHTML = 'Balance: $' + newScore.Balance;
-    console.log(newScore);
-});
 
+let DisplayName = () => {
+
+let me = auth.currentUser;
+console.log(me);
+const docRef = db.collection("users");
+
+docRef.doc((auth.currentUser.uid))
+    .onSnapshot((doc) => {
+        console.log("Current data: ", doc.data().name);
+        playerTitle.innerHTML = doc.data().name;
+
+    });
+};
+
+
+setTimeout(DisplayName, 1200);
 
 
 // Creates array to store the card icons, suits and integers for each card.
