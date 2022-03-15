@@ -7,52 +7,36 @@ const auth = firebase.auth();
 auth.onAuthStateChanged(user => {
     if (user) {
         console.log("User is signed in.")
-      } else {
+    } else {
         console.log("User is not in.")
-      }
+    }
     console.log(user);
     console.log(user.email);
     console.log(user.uid);
 });
 let playerTitle = document.getElementById('playerName');
 
-//REAL TIME DATABASE QUERIES//
-// rootRef.on('child_added',  => {
-//     let playerTitle = snap.val();
-// });
-// Realtime database this gets the first_name of the most recently added name from the db and display it in-game//
-// rootRef.on('child_added', (snapshot) => {
-//     const newPost = snapshot.val();
-//     playerTitle.innerHTML = newPost.First_Name;
-//     console.log(newPost);
-// });
-
-//This updates the chick balance on display.
-// rootRef.on('child_added', (snapshot) => {
-//     const newScore = snapshot.val();
-//     let balance = document.querySelector('.current-chip-balance');
-//     balance.innerHTML = parseInt(newScore.Balance);
-//     playingbalance.innerHTML = 'Balance: $' + newScore.Balance;
-//     console.log(newScore);
-// });
 
 
+// This function displays the name of the user on the chip selection page.
 let DisplayName = () => {
+    let me = auth.currentUser;
+    console.log(me);
+    const docRef = db.collection("users");
 
-let me = auth.currentUser;
-console.log(me);
-const docRef = db.collection("users");
+    docRef.doc((auth.currentUser.uid))
+        .onSnapshot((doc) => {
+            console.log("Current data: ", doc.data().name);
+            playerTitle.innerHTML = doc.data().name;
 
-docRef.doc((auth.currentUser.uid))
-    .onSnapshot((doc) => {
-        console.log("Current data: ", doc.data().name);
-        playerTitle.innerHTML = doc.data().name;
-
-    });
+        });
+        if (playerTitle.innerHTML.length > 0) {
+            clearInterval(clearDM);
+        } 
 };
 
+let clearDM = setInterval(DisplayName, 1200);
 
-setTimeout(DisplayName, 1200);
 
 
 // Creates array to store the card icons, suits and integers for each card.
@@ -204,33 +188,64 @@ function newCard() {
     };
 }
 
+//This function keeps a constant check on the chip balance and displays it at at all times
+
+let newDisplayBalance = () => {
+
+    let me = auth.currentUser;
+    console.log(me);
+    const docRef = db.collection("users");
+
+    docRef.doc((auth.currentUser.uid))
+        .onSnapshot((doc) => {
+            console.log("Current data: ", doc.data().name);
+            balance.innerHTML = doc.data().Balance;
+            playingbalance.innerHTML = 'Balance: $' + doc.data().Balance;
+
+        });
+};
+
+setTimeout(newDisplayBalance, 2000);
+
 //This function updates the database with the users new balance based on the game result
 function updatebalance() {
     if (messageEl2.textContent === 'PLAYER LOST!') {
-        console.log(currentwager.innerHTML);
-        console.log(balance.innerHTML);
-        // balance.innerHTML - currentwager.innerHTML;
-        // let updatedBalance = balance.innerHTML - currentwager.innerHTML;
-        // playingbalance.innerHTML = 'Balance: $' + `${updatedBalance}`;
-        // const newData = {
-        //     Balance: updatedBalance
-        // };
-        // console.log(george);
-        // rootRef.child(george).update(newData)
-        let george = rootRef.orderByKey().limitToLast(1).on("child_added", function (snapshot) {
-            let kiet = snapshot.key;
-            console.log(kiet);
-            balance.innerHTML - currentwager.innerHTML;
-            let updatedBalance = balance.innerHTML - currentwager.innerHTML;
-            playingbalance.innerHTML = 'Balance: $' + `${updatedBalance}`;
-            const newData = {
-                Balance: updatedBalance
-            };
-            rootRef.child(kiet).update(newData);
+        const docRef = db.collection("users").doc((auth.currentUser.uid));
+        balance.innerHTML - currentwager.innerHTML;
+        let updatedBalance = balance.innerHTML - currentwager.innerHTML;
+        playingbalance.innerHTML = 'Balance: $' + `${updatedBalance}`;
+
+        console.log(docRef);
+
+        docRef.update({
+            Balance: updatedBalance,
+        }).then(() => {
+            console.log("Document updated"); // Document updated
+
+        }).catch((error) => {
+            console.log("Error updating doc", error);
         });
-        // return updatedBalance;
+    } else if (messageEl2.textContent === 'PLAYER WINS!') {
+        const docRef = db.collection("users").doc((auth.currentUser.uid));
+        balance.innerHTML + currentwager.innerHTML;
+        let updatedBalance = parseInt(balance.innerHTML) + parseInt(currentwager.innerHTML);
+        console.log(updatedBalance);
+        playingbalance.innerHTML = 'Balance: $' + `${updatedBalance}`;
+
+        console.log(docRef);
+
+        docRef.update({
+            Balance: updatedBalance,
+        }).then(() => {
+            console.log("Document updated"); // Document updated
+
+        }).catch((error) => {
+            console.log("Error updating doc", error);
+        });
     }
-}
+};
+
+
 // When called this function will provide the dealer with 2 cards, this executes after the player presses the stand button.
 function dealersTurn() {
     let removeimg = document.querySelector('.Ivy');
@@ -433,6 +448,28 @@ startGameBtn.addEventListener('click', (e) => {
         drawdealerhands.dispatchEvent(secondevent);
     };
 });
+
+
+
+//REAL TIME DATABASE QUERIES//
+// rootRef.on('child_added',  => {
+//     let playerTitle = snap.val();
+// });
+// Realtime database this gets the first_name of the most recently added name from the db and display it in-game//
+// rootRef.on('child_added', (snapshot) => {
+//     const newPost = snapshot.val();
+//     playerTitle.innerHTML = newPost.First_Name;
+//     console.log(newPost);
+// });
+
+//This updates the chick balance on display.
+// rootRef.on('child_added', (snapshot) => {
+//     const newScore = snapshot.val();
+//     let balance = document.querySelector('.current-chip-balance');
+//     balance.innerHTML = parseInt(newScore.Balance);
+//     playingbalance.innerHTML = 'Balance: $' + newScore.Balance;
+//     console.log(newScore);
+// });
 
 // let george = rootRef.orderByChild("Balance").limitToLast(1).on("child_added", function (snapshot) {
 //     let kiet = snapshot.key;
