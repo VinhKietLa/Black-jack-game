@@ -90,7 +90,18 @@ a:hover {
 #winnerMessage,
 .wager-options,
 .playingwager,
-.playingbalance
+.playingbalance,
+#form-submit,
+#userPassword,
+#userEmail,
+#signupTitle,
+#existingUser,
+.signupsubmit,
+#btnLogout,
+#btnLogin,
+#loginPassword,
+#loginEmail,
+#signupTitle
 {
     font-family: Pokemon-text;
 }
@@ -199,3 +210,22 @@ audio::-webkit-media-controls-panel {
   .img-hover-zoom:hover img {
     transform: scale(1.2);
   }
+
+  //Sign up modal styles
+
+  #userEmail,#userPassword {
+    width: 500px;
+}
+
+.signupsubmit {
+    background-color: $pokemon-sky-blue !important;
+}
+#btnLogin {
+    background-color: $pokemon-blue-color !important;
+    border-color: none;
+}
+
+#btnLogout {
+    background-color: $pokemon-sky-blue !important;
+    border-color: none;
+}

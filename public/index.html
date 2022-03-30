@@ -25,129 +25,133 @@
 </head>
 
 <body>
-    <section class="hero pokemon-title">
+    <nav class="level">
+    <div class="level-left">
+    <!--Login button-->
+    <button class="button level-left" id="btnLogin">Login</button>
+    <!--Login modal-->
+    <div class="modal loginmodal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <h1 class="is-size-2 title has-text-white" id="signupTitle">Sign in to Vinh's Blackjack</h1>
+            <form class="field" id="login-form">
+                <div class="field">
+                    <div class="control">
+                        <input class="input" id="loginEmail" type="email" placeholder="Email">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <input class="input" id="loginPassword" type="password" placeholder="Password">
+                    </div>
+                </div>
+                <div class="field">
+                    <button id="form-submit" class="button is-link">Submit</button>
+                </div>
+            </form>
+        </div>
+        <button class="modal-close is-large" aria-label="close"></button>
+    </div>
+    <button class="button level-left" id="btnLogout">Logout</button>
+    </div>
+    </nav>
+
+    <div class="hero pokemon-title pt-0">
         <div class="hero-body">
             <h1 class="title is-1" id="main-title">
                 <a href="../index.html">Vinh's Blackjack Game </a>
             </h1>
-            <!--Login button-->
-            <button class="button" id="btnLogin">Login</button>
-            <!--Login modal-->
-            <div class="modal loginmodal">
-                <div class="modal-background"></div>
-                <div class="modal-content">
-                    <h1 class="is-size-1 title has-text-white">Sign in to Vinh's Blackjack</h1>
-                    <form class="field" id="login-form">
-                        <div class="field">
-                            <p class="control has-icons-left has-icons-right">
-                                <input class="input" id="loginEmail" type="email" placeholder="Email">
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-envelope"></i>
-                                </span>
-                                <span class="icon is-small is-right">
-                                    <i class="fas fa-check"></i>
-                                </span>
-                            </p>
-                        </div>
-                        <div class="field">
-                            <p class="control has-icons-left">
-                                <input class="input" id="loginPassword" type="password" placeholder="Password">
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-lock"></i>
-                                </span>
-                            </p>
-                        </div>
-                        <div class="field">
-                            <button id="form-submit" class="button is-link">Submit</button>
-                            <span class="icon is-small is-left">
-                            </span>
-                            </p>
-                        </div>
-                    </form>
-                </div>
-                <button class="modal-close is-large" aria-label="close"></button>
-            </div>
-            <button class="button" id="btnLogout">Logout</button>
         </div>
-    </section>
+    </div>
 
-<!--Sign up modal on launch-->
+    <!--Sign up modal on launch-->
 
     <div class="modal is-active" id="signupmodal">
+        <!--add is-active back on-->
         <div class="modal-background"></div>
         <div class="modal-content">
-            <h1 class="is-size-1 title has-text-white">Sign up to play!</h1>
+            <h1 class="is-size-2 title has-text-white" id="signupTitle">Sign up to play!</h1>
             <form class="field" id="signup-form">
                 <div class="field">
-                    <p class="control has-icons-left has-icons-right">
-                        <input id="userEmail" type="email" placeholder="Email">
-                        <span class="icon is-small is-left">
-                        </span>
-                        <span class="icon is-small is-right">
-                        </span>
-                    </p>
+                    <div class="control">
+                        <input class="input is-small mt-2" id="userEmail" type="email" placeholder="Email">
+                    </div>
                 </div>
                 <div class="field">
-                    <p class="control has-icons-left">
-                        <input id="userPassword" type="password" placeholder="Password">
-                        <span class="icon is-small is-left">
-                        </span>
-                    </p>
+                    <div class="control">
+                        <input class="input is-small mt-1" id="userPassword" type="password" placeholder="Password">
+                    </div>
                 </div>
                 <div class="field">
-                    <button id="form-submit" class="button is-link">Submit</button>
-                    <span class="icon is-small is-left">
-                    </span>
+                    <button id="form-submit control" class="button is-link signupsubmit mt-1">Submit</button>
                     </p>
                 </div>
             </form>
-            <button class="button is-small is-danger" id="existingUser">Already got an account?</button>
+            <button class="button is-small is-danger mt-1" id="existingUser">Already got an account?</button>
         </div>
         <button class="modal-close is-large" aria-label="close"></button>
     </div>
 
-    <!-- <form class="field" id="signup-form">
-        <div class="field">
-            <p class="control has-icons-left has-icons-right">
-                <input id="userEmail" type="email" placeholder="Email">
-                <span class="icon is-small is-left">
-                </span>
-                <span class="icon is-small is-right">
-                </span>
-            </p>
-        </div>
-        <div class="field">
-            <p class="control has-icons-left">
-                <input id="userPassword" type="password" placeholder="Password">
-                <span class="icon is-small is-left">
-                </span>
-            </p>
-        </div>
-        <div class="field">
-            <button id="form-submit" class="button is-link">Submit</button>
-            <span class="icon is-small is-left">
-            </span>
-            </p>
-        </div>
-    </form> -->
-
     <section>
+        <h1 id="playerName" class="title"> </h1>
         <container>
-            <a href="html/playername.html">
-                <h2 class="button title is-2 is-ghost has-text-weight-light" id="pressstart">Start Game</h2>
+            <a id ="playernameURL" href="html/playername.html">
+                <button class="button title is-2 is-ghost has-text-weight-light" id="pressstart">Start Game</button>
             </a>
-
-
         </container>
 
     </section>
 
-    <audio controls autoplay>
+    <audio controls>
         <source src="/game-audio/101-opening.mp3" type="audio/mp3">
         Your browser does not support the audio element.
     </audio>
 
-    <!-- <script src="index.js"></script> -->
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th><abbr title="Position">Pos</abbr></th>
+            <th>Name</th>
+            <th><abbr title="Balance">Balance</abbr></th>
+          </tr>
+        </thead>
+     
+        <tbody>
+          <tr>
+            <th>1</th>
+            <td>Leicester City
+            </td>
+            <td>38</td>
+            
+          </tr>
+          <tr>
+            <th>2</th>
+            <td>Arsenal
+            </td>
+            <td>38</td>
+          </tr>
+          <tr>
+            <th>2</th>
+            <td>Man city
+            </td>
+            <td>38</td>
+          </tr>
+          <tr>
+            <th>2</th>
+            <td>Man Utd
+            </td>
+            <td>38</td>
+          </tr>
+          <tr>
+            <th>2</th>
+            <td>Real Madrid
+            </td>
+            <td>38</td>
+          </tr>
+         
+        </tbody>
+      </table>
 </body>
 
 <script type="module">

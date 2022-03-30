@@ -25,13 +25,43 @@
 </head>
 
 <body>
-    <section class="hero pokemon-title">
-        <div class="hero-body">
-            <p class="title is-size-1" id="main-title">
-                <a href="../index.html">Vinh's Blackjack Game </a>
-            </p>
+    <nav class="level">
+        <div class="level-left">
+            <!--Login button-->
+            <button class="button level-left" id="btnLogin">Login</button>
+            <!--Login modal-->
+            <div class="modal loginmodal">
+                <div class="modal-background"></div>
+                <div class="modal-content">
+                    <h1 class="is-size-2 title has-text-white" id="signupTitle">Sign in to Vinh's Blackjack</h1>
+                    <form class="field" id="login-form">
+                        <div class="field">
+                            <div class="control">
+                                <input class="input" id="loginEmail" type="email" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                <input class="input" id="loginPassword" type="password" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <button id="form-submit" class="button is-link">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                <button class="modal-close is-large" aria-label="close"></button>
+            </div>
+            <button class="button level-left" id="btnLogout">Logout</button>
         </div>
-    </section>
+    </nav>
+    <div class="hero pokemon-title pt-0">
+        <div class="hero-body">
+            <h1 class="title is-1" id="main-title">
+                <a href="../index.html">Vinh's Blackjack Game </a>
+            </h1>
+        </div>
+    </div>
 
     <div class="tile is-ancestor">
         <div class="tile is-12 is-vertical" id="playchangedisplay">
@@ -86,12 +116,6 @@
                     <div class="test2 tile is-justify-content-center">
 
                     </div>
-                    <!-- <div class="tile is-child user buttons">
-                        <input id="deal" class="button" type="submit" value="Deal">
-                        <input id="hit" class="button" type="submit" value="Hit">
-                        <input id="double" class="button" type="submit" value="Double">
-                        <input id="stand" class="button stand" type="submit" value="Stand">
-                    </div> -->
                 </div>
             </div>
 
@@ -111,7 +135,6 @@
         </div>
 
     </div>
-
 
     <script type="module">
         // Import the functions you need from the SDKs you need

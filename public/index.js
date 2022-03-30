@@ -5,20 +5,35 @@ const db = firebase.firestore();
 const auth = firebase.auth();
 
 auth.onAuthStateChanged(user => {
-    if (user) {
-        console.log("User is signed in.")
-    } else {
-        console.log("User is not in.")
-    }
-    console.log(user);
-    console.log(user.email);
-    console.log(user.uid);
+        console.log(user);
+        console.log(user.email);
+        const loginBtn = document.getElementById("btnLogin");
+        if(user) {
+            loginBtn.style.display = 'none';
+            console.log('user logged in!')
+        } else{
+            loginBtn.style.display = 'block';
+            console.log('user logged out!')
+
+        }
 });
+
+//User Logout
+const btnLogout = document.getElementById("btnLogout");
+
+btnLogout.addEventListener('click', (e) => {
+    const loginBtn = document.getElementById("btnLogin");
+    e.preventDefault();
+    loginBtn.style.display = 'block';
+    window.location = '../index.html';
+    console.log('User has logged out!');
+    auth.signOut();
+});
+
+// This function displays the name of the user on the chip selection page.
 let playerTitle = document.getElementById('playerName');
 
 
-
-// This function displays the name of the user on the chip selection page.
 let DisplayName = () => {
     let me = auth.currentUser;
     console.log(me);
@@ -149,7 +164,6 @@ function displayRandomCards(event) {
 
 }
 
-
 // When called this function will generate and display two cards for the player.
 function dealHands() {
     if (gameOver === false) {
@@ -212,11 +226,11 @@ function updatebalance() {
     if (messageEl2.textContent === 'PLAYER LOST!') {
         const docRef = db.collection("users").doc((auth.currentUser.uid));
         balance.innerHTML - currentwager.innerHTML;
-        let updatedBalance = balance.innerHTML - currentwager.innerHTML;
+        let updatedBalance = parseInt(balance.innerHTML) - parseInt(currentwager.innerHTML);
         playingbalance.innerHTML = 'Balance: $' + `${updatedBalance}`;
 
         console.log(docRef);
-
+        console.log('LOSER!');
         docRef.update({
             Balance: updatedBalance,
         }).then(() => {
@@ -349,7 +363,7 @@ drawdealerhands.addEventListener('click', (dealDealerHands));
 dealbtn.style.display = 'none';
 hitbtn.addEventListener('click', (newCard));
 hitbtn.style.display = 'none';
-// doublebtn.addEventListener('click', (doublewager));
+doublebtn.addEventListener('click', (doublewager));
 doublebtn.style.display = 'none';
 standbtn.addEventListener('click', (dealersTurn));
 standbtn.style.display = 'none';
@@ -414,11 +428,11 @@ function togglePlayScreen() {
 const playingwager = document.querySelector('.playingwager');
 playingwager.style.display = 'none';
 
-// function doublewager() {
-//     console.log(currentwager.innerHTML);
-//     currentwager.innerHTML = parseInt(currentwager.innerHTML) * 2;
-//     playingwager.innerHTML = 'Wager: $' + currentwager.innerHTML;
-// }
+function doublewager() {
+    console.log(currentwager.innerHTML);
+    currentwager.innerHTML = parseInt(currentwager.innerHTML) * 2;
+    playingwager.innerHTML = 'Wager: $' + currentwager.innerHTML;
+}
 
 let playagain = document.getElementById('playagain');
 
@@ -448,6 +462,17 @@ startGameBtn.addEventListener('click', (e) => {
         drawdealerhands.dispatchEvent(secondevent);
     };
 });
+
+const docRef = db.collection("users");
+
+docRef.get().then(function(querySnapshot) {
+    querySnapshot.forEach(function(doc) {
+        console.log(doc.id, " => ", doc.data());
+    });
+});
+
+
+
 
 
 

@@ -1,32 +1,3 @@
-//annonymous auth//
-
-// firebase.auth().signInAnonymously()
-//   .then(() => {
-//     // Signed in..
-//   })
-//   .catch((error) => {
-//     var errorCode = error.code;
-//     var errorMessage = error.message;
-//     // ...
-//   });
-
-
-//Start Game Homepage Button//
-
-// const btnLogin = document.getElementById('pressstart');
-
-
-
-// btnLogin.addEventListener('click', e => {
-//     firebase.auth().signInAnonymously();
-//     console.log('poo');
-// });
-// firebase.auth().onAuthStateChanged(firebaseUser => {
-//     console.log(firebaseUser);
-// })
-
-
-
 //getData
 const db = firebase.firestore();
 db.collection('Users').get().then(snapshot => {
@@ -42,15 +13,60 @@ const setupUsers = (data) => {
 
 //Listen for auth status changes
 const auth = firebase.auth();
+const pressstart = document.getElementById("pressstart").disabled = true;
 
 auth.onAuthStateChanged(user => {
-    console.log(user);
-    console.log(user.email);
+    const loginBtn = document.getElementById("btnLogin");
+    const pressstart = document.getElementById("pressstart");
+
+    if (user) {
+        loginBtn.style.display = 'none';
+        signupmodal.classList.remove('is-active');
+        console.log('hehe');
+        pressstart.disabled = false;
+    } 
+    else if (user === 'null') {
+        loginBtn.style.display = 'block';
+        pressstart.disabled = true;
+        console.log('LOOOOOOOL')
+    }
+
 });
 
+//displays username on page
+
+let playerTitle = document.getElementById('playerName');
+
+let DisplayName = () => {
+    let me = auth.currentUser;
+    console.log(me);
+    const docRef = db.collection("users");
+    const presstart = document.getElementById("playernameURL");
+    let playerTitle = document.getElementById("playerName");
+    if(!pressstart.disabled){
+    docRef.doc((auth.currentUser.uid))
+        .onSnapshot((doc) => {
+            console.log("Current data: ", doc.data().name);
+            playerTitle.innerHTML = doc.data().name;
+            console.log('poo');
+            if (playerTitle.innerHTML !== doc.data().name) {
+                presstart.href = 'html/playername.html'
+            } else {
+                presstart.href = 'html/playinggame.html';
+
+            }
+        });
+    }
+    if (playerTitle.innerHTML.length >=0) {
+        clearInterval(clearDM);
+    }
+};
+
+let clearDM = setInterval(DisplayName, 1200);
+
 //modal close applies to all modals
-const modalclose1 = document.querySelectorAll('.modal-close')[0];
-const modalclose2 = document.querySelectorAll('.modal-close')[1];
+const modalclose1 = document.querySelectorAll('.modal-close')[0]; //This one is for the sign up to play 
+const modalclose2 = document.querySelectorAll('.modal-close')[1]; //This one applies to the login page
 
 modalclose1.addEventListener('click', (closeModal));
 modalclose2.addEventListener('click', (closeModal));
@@ -62,9 +78,14 @@ function closeModal() {
 
 //If the customer has an existing account this is the button that will take them to the sign in page
 
-const existingUser = document.getElementById('.existingUser');
+const existingUser = document.getElementById('existingUser');
 
-modalclose2.addEventListener('click', (closeModal));
+function existingUserModal() {
+    closeModal(modalclose1);
+    loginmodal.classList.add('is-active');
+}
+
+existingUser.addEventListener('click', (existingUserModal));
 
 // User Signup
 
@@ -91,13 +112,15 @@ signupForm.addEventListener('submit', (e) => {
 });
 
 //User Logout
-
 const btnLogout = document.getElementById("btnLogout");
 
 btnLogout.addEventListener('click', (e) => {
+    const loginBtn = document.getElementById("btnLogin");
     e.preventDefault();
+    loginBtn.style.display = 'block';
+    window.location = 'index.html';
+    console.log('User has logged out!');
     auth.signOut();
-    console.log('User has logged out');
 });
 
 //User Login
@@ -114,7 +137,7 @@ btnLogin.addEventListener('click', (e) => {
     const password = loginform['loginPassword'].value;
 });
 
-loginform.addEventListener('submit', (e) => {
+const loginForm = loginform.addEventListener('submit', (e) => {
     e.preventDefault();
     //get user info from input fields
     const email = loginform['loginEmail'].value;
@@ -123,6 +146,6 @@ loginform.addEventListener('submit', (e) => {
     auth.signInWithEmailAndPassword(email, password).then(cred => {
         console.log(cred.user);
         loginmodal.classList.remove('is-active');
-        console.log('User has logged in');
     })
 });
+

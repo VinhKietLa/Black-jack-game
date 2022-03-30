@@ -3,9 +3,16 @@ const auth = firebase.auth();
 
 
 auth.onAuthStateChanged(user => {
-    console.log(user);
-    console.log(user.email);
-    console.log(user.uid);
+        console.log(user);
+        console.log(user.email);
+        const loginBtn = document.getElementById("btnLogin");
+        if(user) {
+            loginBtn.style.display = 'none';
+            console.log('User has logged in!')
+        } else{
+            loginBtn.style.display = 'block';
+            console.log('User has logged out!')
+        }
 });
 
 let username = document.getElementById("username");
@@ -49,6 +56,17 @@ submitBtn.addEventListener('click', (e) =>{
     // document.location.href = '/html/playinggame.html';
 });
 
+//Changes the press start URL to the game page//
+
+// const changestartgameURL = document.getElementById("pressstart");
+
+// pressstart.addEventListener('click', () => {
+// const playernameURL = document.getElementById("playernameURL");
+//     playernameURL.href = "html/playinggame.html";
+
+// });
+
+
 //This function delays the page navigation to allow the users name input to update to the db
 
 let redirect_Page = () => {
@@ -58,7 +76,14 @@ let redirect_Page = () => {
     }, 1000);
 }
 
+const btnLogout = document.getElementById("btnLogout");
 
+btnLogout.addEventListener('click', (e) => {
+    e.preventDefault();
+    auth.signOut();
+    loginBtn.style.display = 'block';
+    console.log('User has logged out!');
+});
 
 
 // const database = firebase.database();

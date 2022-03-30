@@ -71,7 +71,18 @@ a:hover {
 #winnerMessage,
 .wager-options,
 .playingwager,
-.playingbalance {
+.playingbalance,
+#form-submit,
+#userPassword,
+#userEmail,
+#signupTitle,
+#existingUser,
+.signupsubmit,
+#btnLogout,
+#btnLogin,
+#loginPassword,
+#loginEmail,
+#signupTitle {
   font-family: Pokemon-text;
 }
 
@@ -182,6 +193,24 @@ audio::-webkit-media-controls-panel {
 /* [3] Finally, transforming the image when container gets hovered */
 .img-hover-zoom:hover img {
   transform: scale(1.2);
+}
+
+#userEmail, #userPassword {
+  width: 500px;
+}
+
+.signupsubmit {
+  background-color: #3c5aa6 !important;
+}
+
+#btnLogin {
+  background-color: #2a75bb !important;
+  border-color: none;
+}
+
+#btnLogout {
+  background-color: #3c5aa6 !important;
+  border-color: none;
 }
 
 /*# sourceMappingURL=mysassstyles.css.map */
