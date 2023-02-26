@@ -1,6 +1,16 @@
 // This function displays the name of the user on the chip selection page.
 let playerTitle = document.getElementById('playerName');
 
+function getPlayerName() {
+    let storedUser = localStorage.getItem("Users");
+    let user = JSON.parse(storedUser);
+    console.log(user);
+    let lastEntry = user[user.length - 1].name;
+
+    playerTitle.textContent = lastEntry;
+}
+
+getPlayerName();
 
 // Creates array to store the card icons, suits and integers for each card.
 let cards = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
@@ -172,38 +182,18 @@ function newCard() {
 //This function updates the database with the users new balance based on the game result
 function updatebalance() {
     if (messageEl2.textContent === 'PLAYER LOST!') {
-        const docRef = db.collection("users").doc((auth.currentUser.uid));
         balance.innerHTML - currentwager.innerHTML;
         let updatedBalance = parseInt(balance.innerHTML) - parseInt(currentwager.innerHTML);
         playingbalance.innerHTML = 'Balance: $' + `${updatedBalance}`;
 
-        console.log(docRef);
-        console.log('LOSER!');
-        docRef.update({
-            Balance: updatedBalance,
-        }).then(() => {
-            console.log("Document updated"); // Document updated
 
-        }).catch((error) => {
-            console.log("Error updating doc", error);
-        });
     } else if (messageEl2.textContent === 'PLAYER WINS!') {
-        const docRef = db.collection("users").doc((auth.currentUser.uid));
         balance.innerHTML + currentwager.innerHTML;
         let updatedBalance = parseInt(balance.innerHTML) + parseInt(currentwager.innerHTML);
         console.log(updatedBalance);
         playingbalance.innerHTML = 'Balance: $' + `${updatedBalance}`;
 
-        console.log(docRef);
-
-        docRef.update({
-            Balance: updatedBalance,
-        }).then(() => {
-            console.log("Document updated"); // Document updated
-
-        }).catch((error) => {
-            console.log("Error updating doc", error);
-        });
+        
     }
 };
 
