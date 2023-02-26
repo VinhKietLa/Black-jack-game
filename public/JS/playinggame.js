@@ -1,14 +1,3 @@
-const database = firebase.database();
-const rootRef = database.ref('users');
-
-console.log(database);
-
-function poo(){
-    console.log('Hello!');
-}
-
-poo();
-
 let cards = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 let suits = ["diamonds", "hearts", "spades", "clubs"];
 let numbervalue = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]

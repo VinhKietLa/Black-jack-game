@@ -1,57 +1,5 @@
-// Accesses the firebase realtime DB and sets the username from the name they entered on the whatsmyname page.
-// const database = firebase.database();
-// const rootRef = database.ref('users');
-const db = firebase.firestore();
-const auth = firebase.auth();
-
-auth.onAuthStateChanged(user => {
-        console.log(user);
-        console.log(user.email);
-        const loginBtn = document.getElementById("btnLogin");
-        if(user) {
-            loginBtn.style.display = 'none';
-            console.log('user logged in!')
-        } else{
-            loginBtn.style.display = 'block';
-            console.log('user logged out!')
-
-        }
-});
-
-//User Logout
-const btnLogout = document.getElementById("btnLogout");
-
-btnLogout.addEventListener('click', (e) => {
-    const loginBtn = document.getElementById("btnLogin");
-    e.preventDefault();
-    loginBtn.style.display = 'block';
-    window.location = '../index.html';
-    console.log('User has logged out!');
-    auth.signOut();
-});
-
 // This function displays the name of the user on the chip selection page.
 let playerTitle = document.getElementById('playerName');
-
-
-let DisplayName = () => {
-    let me = auth.currentUser;
-    console.log(me);
-    const docRef = db.collection("users");
-
-    docRef.doc((auth.currentUser.uid))
-        .onSnapshot((doc) => {
-            console.log("Current data: ", doc.data().name);
-            playerTitle.innerHTML = doc.data().name;
-
-        });
-        if (playerTitle.innerHTML.length > 0) {
-            clearInterval(clearDM);
-        } 
-};
-
-let clearDM = setInterval(DisplayName, 1200);
-
 
 
 // Creates array to store the card icons, suits and integers for each card.
@@ -204,22 +152,22 @@ function newCard() {
 
 //This function keeps a constant check on the chip balance and displays it at at all times
 
-let newDisplayBalance = () => {
+// let newDisplayBalance = () => {
 
-    let me = auth.currentUser;
-    console.log(me);
-    const docRef = db.collection("users");
+//     let me = auth.currentUser;
+//     console.log(me);
+//     const docRef = db.collection("users");
 
-    docRef.doc((auth.currentUser.uid))
-        .onSnapshot((doc) => {
-            console.log("Current data: ", doc.data().name);
-            balance.innerHTML = doc.data().Balance;
-            playingbalance.innerHTML = 'Balance: $' + doc.data().Balance;
+//     docRef.doc((auth.currentUser.uid))
+//         .onSnapshot((doc) => {
+//             console.log("Current data: ", doc.data().name);
+//             balance.innerHTML = doc.data().Balance;
+//             playingbalance.innerHTML = 'Balance: $' + doc.data().Balance;
 
-        });
-};
+//         });
+// };
 
-setTimeout(newDisplayBalance, 2000);
+// setTimeout(newDisplayBalance, 2000);
 
 //This function updates the database with the users new balance based on the game result
 function updatebalance() {
@@ -463,13 +411,13 @@ startGameBtn.addEventListener('click', (e) => {
     };
 });
 
-const docRef = db.collection("users");
+// const docRef = db.collection("users");
 
-docRef.get().then(function(querySnapshot) {
-    querySnapshot.forEach(function(doc) {
-        console.log(doc.id, " => ", doc.data());
-    });
-});
+// docRef.get().then(function(querySnapshot) {
+//     querySnapshot.forEach(function(doc) {
+//         console.log(doc.id, " => ", doc.data());
+//     });
+// });
 
 
 

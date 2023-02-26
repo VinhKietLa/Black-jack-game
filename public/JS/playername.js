@@ -1,59 +1,9 @@
-const db = firebase.firestore();
-const auth = firebase.auth();
-
-
-auth.onAuthStateChanged(user => {
-        console.log(user);
-        console.log(user.email);
-        const loginBtn = document.getElementById("btnLogin");
-        if(user) {
-            loginBtn.style.display = 'none';
-            console.log('User has logged in!')
-        } else{
-            loginBtn.style.display = 'block';
-            console.log('User has logged out!')
-        }
-});
-
 let username = document.getElementById("username");
-let form = document.getElementById("form");
 let submitBtn = document.querySelector(".redyes");
-let cancelBtn = document.querySelector(".blueno");
-
-
-db.collection('users').get().then(snapshot => {
-    setupUsers(snapshot.docs);
-});
-
-// const setupUsers = (user) => {
-//     db.collection('users').doc(user.uid).get().then(doc => {
-//         console.log(user.email);
-//     });    
-// }
-
-
-const setupUsers = (data) => {
-    data.forEach(doc => {
-        const guide = doc.data();
-        console.log(guide)
-    });
-}
 
 submitBtn.addEventListener('click', (e) =>{
     e.preventDefault();
-    console.log(username.value);
-    let user = firebase.auth().currentUser;
-    console.log(user);
-    let userUID = user.uid;
-    console.log(userUID);
-    db.collection('users').doc(userUID).update({
-        name: username.value,
-    },{ merge: true })
-    .then(() => {
-        console.log("Document successfully written!");
-    })
-    redirect_Page();
-    // document.location.href = '/html/playinggame.html';
+    document.location.href = '../html/playinggame.html';
 });
 
 //Changes the press start URL to the game page//
@@ -69,21 +19,13 @@ submitBtn.addEventListener('click', (e) =>{
 
 //This function delays the page navigation to allow the users name input to update to the db
 
-let redirect_Page = () => {
-    let tID = setTimeout(function () {
-        window.location.href = document.location.href = '/html/playinggame.html';
-        window.clearTimeout(tID);		// clear time out.
-    }, 1000);
-}
+// let redirect_Page = () => {
+//     let tID = setTimeout(function () {
+//         window.location.href = document.location.href = '/html/playinggame.html';
+//         window.clearTimeout(tID);		// clear time out.
+//     }, 1000);
+// }
 
-const btnLogout = document.getElementById("btnLogout");
-
-btnLogout.addEventListener('click', (e) => {
-    e.preventDefault();
-    auth.signOut();
-    loginBtn.style.display = 'block';
-    console.log('User has logged out!');
-});
 
 
 // const database = firebase.database();
