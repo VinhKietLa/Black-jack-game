@@ -1,13 +1,18 @@
 // This function displays the name of the user on the chip selection page.
 let playerTitle = document.getElementById('playerName');
+let balance = document.querySelector('.current-chip-balance');
+const playingbalance = document.querySelector('.playingbalance');
+playingbalance.style.display = 'none';
 
 function getPlayerName() {
     let storedUser = localStorage.getItem("Users");
     let user = JSON.parse(storedUser);
     console.log(user);
     let lastEntry = user[user.length - 1].name;
-
-    playerTitle.textContent = lastEntry;
+    let lastScore = user[user.length -1].score;
+    playerTitle.innerHTML = lastEntry;
+    balance.innerHTML = lastScore;
+    playingbalance.innerHTML = '$' + lastScore;
 }
 
 getPlayerName();
@@ -160,42 +165,43 @@ function newCard() {
     };
 }
 
-//This function keeps a constant check on the chip balance and displays it at at all times
-
-// let newDisplayBalance = () => {
-
-//     let me = auth.currentUser;
-//     console.log(me);
-//     const docRef = db.collection("users");
-
-//     docRef.doc((auth.currentUser.uid))
-//         .onSnapshot((doc) => {
-//             console.log("Current data: ", doc.data().name);
-//             balance.innerHTML = doc.data().Balance;
-//             playingbalance.innerHTML = 'Balance: $' + doc.data().Balance;
-
-//         });
-// };
-
-// setTimeout(newDisplayBalance, 2000);
-
 //This function updates the database with the users new balance based on the game result
 function updatebalance() {
+    const users = localStorage.getItem('Users'); // get the JSON string from local storage
+    const score = parseInt(currentwager.innerHTML); // get the new score value
+  
     if (messageEl2.textContent === 'PLAYER LOST!') {
-        balance.innerHTML - currentwager.innerHTML;
-        let updatedBalance = parseInt(balance.innerHTML) - parseInt(currentwager.innerHTML);
-        playingbalance.innerHTML = 'Balance: $' + `${updatedBalance}`;
-
-
+      let updatedBalance = parseInt(balance.innerHTML) - score;
+      playingbalance.innerHTML = 'Balance: $' + `${updatedBalance}`;
+      localStorage.setItem('score', updatedBalance);
+  
+      // update the score value for the last user in the JSON string and store it again
+      const usersArr = JSON.parse(users);
+      const lastUser = usersArr[usersArr.length - 1];
+      if (lastUser) {
+        lastUser.score += score;
+      }
+      const updatedUsers = JSON.stringify(usersArr);
+      localStorage.setItem('Users', updatedUsers);
+  
+      console.log('hi');
     } else if (messageEl2.textContent === 'PLAYER WINS!') {
-        balance.innerHTML + currentwager.innerHTML;
-        let updatedBalance = parseInt(balance.innerHTML) + parseInt(currentwager.innerHTML);
-        console.log(updatedBalance);
-        playingbalance.innerHTML = 'Balance: $' + `${updatedBalance}`;
-
-        
+      let updatedBalance = parseInt(balance.innerHTML) + score;
+      playingbalance.innerHTML = 'Balance: $' + `${updatedBalance}`;
+      localStorage.setItem('score', updatedBalance);
+  
+      // update the score value for the last user in the JSON string and store it again
+      const usersArr = JSON.parse(users);
+      const lastUser = usersArr[usersArr.length - 1];
+      if (lastUser) {
+        lastUser.score += score;
+      }
+      const updatedUsers = JSON.stringify(usersArr);
+      localStorage.setItem('Users', updatedUsers);
+  
+      console.log('bye');
     }
-};
+  };
 
 
 // When called this function will provide the dealer with 2 cards, this executes after the player presses the stand button.
@@ -316,12 +322,9 @@ function load() {
 window.addEventListener('load', load);
 
 //wager options
-
-const playingbalance = document.querySelector('.playingbalance');
-playingbalance.style.display = 'none';
 let wager = 0;
-let balance = document.querySelector('.current-chip-balance');
-balance.innerHTML = parseInt(500);
+
+
 //This cycles through the chips and assigns a HTML value;
 const chip10 = document.getElementById('chip-10');
 const chip25 = document.getElementById('chip-25');
@@ -386,18 +389,21 @@ const startGameBtn = document.getElementById('start-game-button');
 const wagermenu = document.getElementById('wagerchips');
 
 startGameBtn.addEventListener('click', (e) => {
-    if (parseInt(currentwager.innerHTML[0]) === 0) {
+    let newBalance = localStorage.getItem('score');
+    console.log(currentwager.innerHTML);
+    if (currentwager.innerHTML === '') {
         alert('Please select a bet');
     } else {
         togglePlayScreen();
         wagermenu.style.display = 'none';
         dealbtn.style.display = 'inline-block';
         playingwager.innerHTML += parseInt(currentwager.innerHTML);
-        // playingbalance.innerHTML = 'Balance:  $' + parseInt(balance.innerHTML);
         let clickEvent = new Event('click');
         let secondevent = new Event('click');
         dealbtn.dispatchEvent(clickEvent);
         drawdealerhands.dispatchEvent(secondevent);
+        getPlayerName();
+
     };
 });
 
