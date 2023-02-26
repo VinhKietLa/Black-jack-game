@@ -170,37 +170,38 @@ function updatebalance() {
     const users = localStorage.getItem('Users'); // get the JSON string from local storage
     const score = parseInt(currentwager.innerHTML); // get the new score value
   
+    let updatedBalance = parseInt(balance.innerHTML);
+
+    console.log(score);
+    console.log(updatedBalance);
     if (messageEl2.textContent === 'PLAYER LOST!') {
-      let updatedBalance = parseInt(balance.innerHTML) - score;
-      playingbalance.innerHTML = 'Balance: $' + `${updatedBalance}`;
-      localStorage.setItem('score', updatedBalance);
-  
-      // update the score value for the last user in the JSON string and store it again
-      const usersArr = JSON.parse(users);
-      const lastUser = usersArr[usersArr.length - 1];
-      if (lastUser) {
-        lastUser.score += score;
-      }
-      const updatedUsers = JSON.stringify(usersArr);
-      localStorage.setItem('Users', updatedUsers);
-  
+      updatedBalance -= score;
       console.log('hi');
+
+      const usersArr = JSON.parse(users);
+      const lastUser = usersArr[usersArr.length - 1];
+      if (lastUser) {
+        lastUser.score = updatedBalance;
+        const updatedUsers = JSON.stringify(usersArr);
+        localStorage.setItem('Users', updatedUsers);
+      }
+  
     } else if (messageEl2.textContent === 'PLAYER WINS!') {
-      let updatedBalance = parseInt(balance.innerHTML) + score;
-      playingbalance.innerHTML = 'Balance: $' + `${updatedBalance}`;
-      localStorage.setItem('score', updatedBalance);
+      updatedBalance += score;
+      console.log('bye');
   
       // update the score value for the last user in the JSON string and store it again
       const usersArr = JSON.parse(users);
       const lastUser = usersArr[usersArr.length - 1];
       if (lastUser) {
         lastUser.score += score;
+        const updatedUsers = JSON.stringify(usersArr);
+        localStorage.setItem('Users', updatedUsers);
       }
-      const updatedUsers = JSON.stringify(usersArr);
-      localStorage.setItem('Users', updatedUsers);
-  
-      console.log('bye');
     }
+  
+    playingbalance.innerHTML = 'Balance: $' + `${updatedBalance}`;
+    localStorage.setItem('score', updatedBalance);
   };
 
 
