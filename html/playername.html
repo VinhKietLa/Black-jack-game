@@ -1,30 +1,47 @@
 <html>
 <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
     <link rel="stylesheet" href="../index.css">
-    <link rel="stylesheet" href="../css/mysassstyles.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <title>Pokemon Blackjack</title>
 </head>
 
-<body>
-    <nav>
-        <div class="hero pokemon-title pt-0">
-            <div class="hero-body">
-                <h1 class="title is-1" id="main-title">
-                    <a href="../index.html">Vinh's Blackjack Game </a>
-                </h1>
-            </div>
+<body class="min-h-screen flex flex-col">
+    <div class="pokemon-title mt-16">
+        <h1 class="text-pokemonHero text-6xl text-center" id="main-title">
+            <a href="../index.html">Vinh's Blackjack Game </a>
+        </h1>
+    </div>
+
+
+    <div class="flex-1 flex flex-col justify-center items-center">
+        <div>
+            <h2 id="inputname" class="text-5xl"><img class="mx-auto" src="../Images/charizard.ico">
+                Whats your name?</h2>
+         </div>
+
+         <div>  
+            <input type="text" id="username" autocomplete="off" class="text-4xl mt-6"
+                placeholder="_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _">
+            <input class="redyes text-pokemonRed text-3xl" type="submit" value="Go">
         </div>
 
-    <section id="main">
-        <div id="form">
-            <h2 class="title is-2" id="inputname"><img src="../Images/charizard.ico"> Whats your name?</h2>
+    </div>
+
+    <!-- <div id="main">
+        <div>
+            <img src="../Images/charizard.ico">
+            <h2 class="" id="inputname">Whats your name?</h2>
+           
+         </div>
+
+         <div>  
             <input class="input is-size-4" type="text" id="username" autocomplete="off"
                 placeholder="_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _">
             <input class="button redyes buttonblock" type="submit" value="Go">
         </div>
 
-    </section>
+    </div> -->
 
     </script>
     <script type="module" src="/JS/playername.js"></script>

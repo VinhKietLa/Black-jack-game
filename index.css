@@ -50,7 +50,7 @@
 
 body {
     /* background-color: lavenderblush; */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Pokemon-text';
     font-weight: bold;
     color: black;
     text-align: center;
@@ -68,7 +68,6 @@ body {
 #inputname {
   font-family: "Pokemon-text";
   color: black;
-  margin-top: 400px;
   animation: bounce 1s infinite alternate;
   -webkit-animation: bounce 1s infinite alternate;
 }
@@ -89,6 +88,14 @@ body {
   to {
     transform: translateY(-15px);
   }
+}
+
+#username {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.redyes {
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 
