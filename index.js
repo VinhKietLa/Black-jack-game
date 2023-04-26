@@ -149,9 +149,9 @@ function hidefirstcard() {
     smokey.firstChild.style.display = 'none';
     var img = document.createElement("img");
     img.src = "../Images/rearofcard.jpeg";
-    img.width = "95";
-    img.height = "150";
-    img.className = 'pokecard';
+   
+    
+    img.className = 'pokecard card';
     smokey.appendChild(img);
     smokey.firstChild.classList.add('Ivy');
 }
@@ -221,11 +221,10 @@ function dealersTurn() {
     }
     cardSum2.innerHTML = dealerSum;
     setTimeout(dealerPlayer, 1000);
-    console.log(dealerSum);
-    console.log(playerSum);
     hitbtn.style.display = 'none';
     doublebtn.style.display = 'none';
     standbtn.style.display = 'none';
+
     setTimeout(updatebalance, 1500);
 }
 
@@ -268,6 +267,7 @@ function dealerPlayer() {
     } else {
         message1 = 'No hands dealt!';
     }
+    playagain.style.display = 'inline-block';
     return messageEl2.textContent = message1;
 }
 
@@ -377,6 +377,7 @@ function doublewager() {
 }
 
 let playagain = document.getElementById('playagain');
+playagain.style.display ='none';
 
 function playAgain() {
     location.reload();
