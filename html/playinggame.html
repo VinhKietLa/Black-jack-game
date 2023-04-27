@@ -5,115 +5,137 @@
     <link rel="stylesheet" href="../index.css">
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <title>Pokemon Blackjack</title>
+
+    <style>
+        .main-container {
+
+            height: 100vh;
+            /* overflow: hidden; */
+        }
+    </style>
 </head>
 
 <body class="min-h-screen flex flex-col">
-    <div class="pokemon-title mt-16">
-        <h1 class="text-pokemonHero text-6xl text-center" id="main-title">
-            <a href="../index.html">Vinh's Blackjack Game </a>
-        </h1>
-    </div>
 
-    <!--Dealer section-->
-    <div class="mt-12">
+    <div class="main-container">
 
-        <div class="" id="playchangedisplay">
-            <div class="dealerdiv pb-12">
-                <div class="dealerdeck flex flex-col justify-center items-center">
 
-                    <!--dealer name-->
-                    <div class="flex h-44">
-                        <img src="../Images/arbok.ico" class="h-full"><img src="../Images/weezing.ico" class="h-full">
+        <div class="pokemon-title mt-6">
+            <h1 class="text-pokemonHero text-6xl text-center" id="main-title">
+                <a href="../index.html">Vinh's Blackjack Game </a>
+            </h1>
+        </div>
+
+        <!--Dealer section-->
+        <div class="mt-12">
+
+            <div class="" id="playchangedisplay">
+                <div class="dealerdiv pb-12">
+                    <div class="dealerdeck flex flex-col justify-center items-center">
+
+                        <!--dealer name-->
+                        <div class="flex h-24">
+                            <img src="../Images/arbok.ico" class="h-full"><img src="../Images/weezing.ico"
+                                class="h-full">
+                        </div>
+                        <h1 id="dealerName" class="mt-6 text-xl">Team Rocket</h1>
+
+                        <!--Both dealer cards-->
+                        <div id="dealercard1" class="flex mb-6"></div>
+                        <p id="messageSum2"></p>
+
+                        <!--Dealer total-->
+                        <p id="cardSum2"></p>
                     </div>
-                    <h1 id="dealerName" class="mt-6 text-3xl">Team Rocket</h1>
-
-                    <!--Both dealer cards-->
-                    <div id="dealercard1" class="flex mb-6"></div>
-                    <p id="messageSum2"></p>
-
-                    <!--Dealer total-->
-                    <p id="cardSum2"></p>
                 </div>
             </div>
-        </div>
 
-        <!--Post game message-->
-        <div class="is-justify-content-center">
-            <h1 id="winnerMessage" class="is-size-2"></h1>
-        </div>
+            <!--Post game message-->
+            <div class="is-justify-content-center">
+                <h1 id="winnerMessage"></h1>
+            </div>
 
-        <!--Player bets selects-->
+            <!--Player bets selects-->
 
-        <div class="wager-options mt-56" id='wagerchips'>
-            <p class="text-3xl">Select your bet below</p>
-            <div class="mt-4 flex justify-center h-44 mt-16">
-                <div class="img-hover-zoom">
-                    <a href="#" id="chip-10"><img src="../Images/10.png" class="wager wager-clickable h-full"></a>
+            <div class="wager-options mt-26" id='wagerchips'>
+                <p class="text-xl">Select your bet below</p>
+                <div class="mt-4 flex justify-center mt-16">
+                    <div class="img-hover-zoom">
+                        <a href="#" id="chip-10"><img src="../Images/10.png" class="wager wager-clickable h-full"></a>
+                    </div>
+                    <div class="img-hover-zoom">
+                        <a href="#" id="chip-25"><img src="../Images/25.png" class="wager wager-clickable h-full"></a>
+                    </div>
+                    <div class="img-hover-zoom">
+                        <a href="#" id="chip-50"><img src="../Images/50.png" class="wager wager-clickable h-full"></a>
+                    </div>
+                    <div class="img-hover-zoom">
+                        <a href="#" id="chip-100"><img src="../Images/100.png" class="wager wager-clickable h-full"></a>
+                    </div>
                 </div>
-                <div class="img-hover-zoom">
-                    <a href="#" id="chip-25"><img src="../Images/25.png" class="wager wager-clickable h-full"></a>
-                </div>
-                <div class="img-hover-zoom">
-                    <a href="#" id="chip-50"><img src="../Images/50.png" class="wager wager-clickable h-full"></a>
-                </div>
-                <div class="img-hover-zoom">
-                    <a href="#" id="chip-100"><img src="../Images/100.png" class="wager wager-clickable h-full"></a>
+                <br>
+
+                <!--Chip balance-->
+                <div>
+                    <div class="wagermenu">
+                        <div class="flex justify-center">
+                            <p class="current-wager mr-4 text-lg"></p>
+
+                            <!--Chip balance-->
+
+                            <span><img src="../Images/poke-dollar.png" class="wager-small w-4 h-5"></span>
+                            <p class="current-chip-balance ml-1 text-xl">$</p>
+                        </div>
+
+                    </div>
+
+                    <!--Play button-->
+                    <button id="start-game-button"
+                        class="border-4 bg-white p-2 text-pokemonSkyblue rounded-xl mt-6 mb-12 text-lg">Play</button>
                 </div>
             </div>
-            <br>
 
-            <!--Chip balance-->
-            <div>
-                <div class="wagermenu">
-                    <div class="flex justify-center">
-                        <p class="current-wager mr-4 text-3xl"></p>
 
-                        <!--Chip balance-->
+            <div class="flex testdiv justify-center">
+                <!--playner name,-->
+                <div class="mt-12">
+                    <div class="deck dealerdiv2">
+                        <h1 id="playerName" class="text-xl"></h1>
+                        <p id="messageSum" class="text-xl mt-2 mb-2"></p>
+                        <p id="cardSum" class="text-xl"></p>
+                        <div class="test2 flex justify-center mt-6">
 
-                        <span><img src="../Images/poke-dollar.png" class="wager-small w-4 h-5"></span>
-                        <p class="current-chip-balance ml-1 text-3xl">$</p>
+                        </div>
+
                     </div>
 
                 </div>
 
-                <!--Play button-->
-                <button id="start-game-button"
-                    class="border-4 bg-white p-2 text-pokemonSkyblue rounded-xl mt-6 mb-12 text-2xl">Play</button>
-            </div>
-        </div>
 
-
-        <!--playner name,-->
-        <div class="mt-36">
-            <div class="deck dealerdiv2">
-                <h1 id="playerName" class="text-3xl"></h1>
-                <p id="messageSum" class="text-xl mt-12 mb-12"></p>
-                <p id="cardSum" class="text-xl"></p>
-                <div id="deck2"></div>
-                <div class="test2 flex justify-center mt-6">
+                <!--Wager, balance, play again, hit, double, stand button-->
+                <div class="tester mt-12">
+                    <p class="playingwager">Wager:</p>
+                    <p class="playingbalance">Balance:</p>
+                    <button class="border-2 p-4 bg-white text-pokemonRed rounded-xl" id="playagain">Play Again!</button>
+                    <div class="user ">
+                        <input id="deal" class="p-4 rounded-xl border-2 border-gray-400" type="submit" value="Deal">
+                        <input id="hit" class="p-4 rounded-xl border-2 border-gray-400" type="submit" value="Hit">
+                        <input id="double" class="p-4 rounded-xl border-2 border-gray-400" type="submit" value="Double">
+                        <input id="stand" class="stand p-4 rounded-xl border-2 border-gray-400" type="submit"
+                            value="Stand">
+                        <input id="drawdealerhands"
+                            class="drawdealerhands hidden p-4 rounded-xl border-2 border-gray-400" type="submit"
+                            value="drawdealerhands">
+                    </div>
                 </div>
             </div>
-        </div>
 
-    </div>
-
-    <!--Wager, balance, play again, hit, double, stand button-->
-    <div class="tester mt-12">
-        <p class="playingwager">Wager:</p>
-        <p class="playingbalance">Balance:</p>
-        <button class="border-2 p-4 bg-white text-pokemonRed rounded-xl" id="playagain">Play Again!</button>
-        <div class="user ">
-            <input id="deal" class="p-4 rounded-xl border-2 border-gray-400" type="submit" value="Deal">
-            <input id="hit" class="p-4 rounded-xl border-2 border-gray-400" type="submit" value="Hit">
-            <input id="double" class="p-4 rounded-xl border-2 border-gray-400" type="submit" value="Double">
-            <input id="stand" class="stand p-4 rounded-xl border-2 border-gray-400" type="submit" value="Stand">
-            <input id="drawdealerhands" class="drawdealerhands hidden p-4 rounded-xl border-2 border-gray-400" type="submit" value="drawdealerhands">
         </div>
     </div>
-
-
-    <script type="module" src="../index.js"></script>
 
 </body>
+<script type="module" src="../index.js"></script>
+
+
 
 </html>

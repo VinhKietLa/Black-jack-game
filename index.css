@@ -108,14 +108,14 @@ body {
 .card {
   border: solid 1px #aaa;
   border-radius: 9px;
-  width: 150px;
-  height: 220px;
+  width: 120px;
+  height: 100px;
   padding: 3px 3px 3px px;
   margin: 5px;
-  background-size: 140px 100px;
+  background-size: 80px 40px;
   background-repeat: no-repeat;
-  background-position-x: 0px;
-  background-position-y: 65px;
+  background-position-x: 20px;
+  background-position-y: 40px;
   font-size: 25px;
   background-color: whitesmoke;
 }
@@ -144,7 +144,7 @@ body {
 }
 
 .user {
-  padding-top: 50px;
+  padding-top: 20px;
 }
 
 audio::-webkit-media-controls-panel {
@@ -154,7 +154,7 @@ audio::-webkit-media-controls-panel {
 /*pokechip images*/
 
 .img-hover-zoom {
-  height: 96px; /* [1.1] Set it as per your need */
+  height: 100px; /* [1.1] Set it as per your need */
 }
 
 /* [2] Transition property for smooth transformation of images */
@@ -166,19 +166,6 @@ audio::-webkit-media-controls-panel {
 .img-hover-zoom:hover img {
   transform: scale(1.2);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #startgame, #newCard {
     width: 200px;

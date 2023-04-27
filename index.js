@@ -277,15 +277,15 @@ function stillAlive() {
     let messageEl = document.getElementById('messageSum');
     let message = '';
     if (playerSum <= 20 && gameOver === false) {
-        message = "Do you want to draw a new card? 🙂"
+        message = "Do you want to draw a new card?"
         gameOver = false;
     } else if (playerSum === 21 && gameOver === false) {
-        message = "Wohoo! You've got Blackjack! 🥳"
+        message = "Wohoo! You've got Blackjack!"
         gameOver = true;
         dealersTurn();
     } else if (playerSum > 21 && gameOver === false) {
         console.log('executed')
-        message = "You're out off the game! 😭"
+        message = "You're out off the game!"
         isAlive = false;
         gameOver = true;
         dealersTurn();
